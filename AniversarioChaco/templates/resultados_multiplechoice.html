@@ -1,0 +1,47 @@
+{% extends "plantillaBASE.html" %}
+<!-- ahora hay que colocar que herede de plantilla base -->
+<!-- que cargue todo lo que hay en carpeta static -->
+{% load static %}
+{% block title %}RESULTADOS{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+
+
+    <h1>Resultados de Multiple Choice</h1>
+    <table class="table table-striped table-bordere">
+        <thead class="bg-dark text-white">
+          <tr>
+            <th scope="col">Puestos</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Puntaje</th>
+            <th scope="col">Correo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  {% endblock %}
+
+

@@ -1,0 +1,41 @@
+{% extends "plantillaBASE.html" %}
+<!-- ahora hay que colocar que herede de plantilla base -->
+<!-- que cargue todo lo que hay en carpeta static -->
+{% load static %}
+{% block title %}INICIO{% endblock %}
+{% block content %}
+
+
+
+<div class="container clearfix py-3">
+  <div class="embed-responsive-item embed-responsive-16by9 py-3">
+    <!-- controls -->
+    <video width="500" height="355" class="col-md-6 float-md-end mb-3 ms-md-3" preload="auto" loop="" autoplay='' muted="muted"> 
+      <source src="{% static 'media\Drone Plaza 25 de Mayo _ Resistencia, Chaco, Argentina.mp4' %}" type="video/mp4">
+    </video>
+
+    <!-- <img width="560" height="315" src="{% static 'video\chaco-dnu-alberto-medidas-sanitarias-1-lit.jpg' %}" autoplay muted loop class="col-md-6 float-md-end mb-3 ms-md-3" ></img>
+      -->
+    <p class="text-center">
+      Bienvenido a la aplicación hecha por el <b>Grupo XXX</b>, es una aplicación Web de preguntas y respuestas. Este proyecto fue hecho en conmemoración al aniversario de <b>La Provincialización de Chaco.</b>
+    </p>
+    
+    <p class="text-center">
+      La <b>Provincia del Chaco</b> (tal como figura en su Constitución provincial) o Chaco es una de las 23 provincias de la República Argentina. A su vez, es uno de los 24 estados autogobernados que conforman el país y uno de los 24 distritos electorales legislativos nacionales.​ Su capital y ciudad más poblada es Resistencia.
+    </p>
+    
+    
+    <p class="text-center">
+      Está ubicada en el noreste del país, en la región del Norte Grande Argentino, limitando al norte con los ríos Bermejo y Teuco que la separan de Formosa, al este con los ríos Paraguay y Paraná que la separan, respectivamente, de la República del Paraguay y la provincia de Corrientes, al sur con Santa Fe, al oeste con Santiago del Estero y al noroeste con la provincia de Salta. Tras su última actualización de límites, posee una superficie de 99633 km², lo que la ubica como la 12.ª provincia más extensa del país, prácticamente a mitad del listado de distritos por tamaño.
+    </p>
+    
+      
+    <p class="text-center">
+      En 2010, Chaco pasó a ser la segunda provincia argentina en adoptar más de un idioma oficial, al declarar en 2010 a los idiomas qom (lengua nativa de la etnia toba), moqoit (lengua nativa de la etnia mocoví) y wichi (lengua nativa de la etnia wichi) como idiomas oficiales alternativos de la Provincia. De esta manera, Chaco se sumaría a su vecina Provincia de Corrientes como las únicas de la República Argentina en poseer un idioma oficial además del castellano.
+    </p>
+  </div>
+</div>
+    
+    
+  {% endblock %}
+

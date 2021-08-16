@@ -1,0 +1,61 @@
+{% extends "registration/login_base.html" %}
+{% load static %}
+{% block title %}Inicio de Sesión {% endblock %}
+{% block content %}
+<form class="login100-form validate-form" method="POST">
+    <span class="login100-form-title p-b-34">
+        Ingreso de Usuario
+    </span>
+    
+	
+
+
+	 {% if form.errors %}
+	 <p>Tu nombre de usuario y/o contraseña es incorrecto. Por favor intenta de nuevo o Registrate.</p>
+ 
+	{% else %}
+	<p>Por favor para ingresar acceda con un usuario valido o registrese.</p>
+	{% endif %}
+
+	 {% csrf_token %}
+	 {{ empty }}
+	{% for formulario in form %}
+	
+    <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate={{ formulario.label_tag }}
+		
+        <input id="first-name" class="input100" {{ formulario }}
+        <span class="focus-input100"></span>
+    </div>
+    
+    {% endfor %}
+	
+	
+             
+             
+         
+
+    <div class="container-login100-form-btn">
+        <button class="login100-form-btn">
+            Ingresar
+        </button>
+    </div>
+
+    <div class="w-full text-center p-t-27 p-b-239">
+        <span class="txt1">
+            Olvidaste
+        </span>
+
+        <a href="#" class="txt2">
+            Nombre de usario / contraseña?
+        </a>
+    </div>
+
+    <div class="w-full text-center">
+        <a href="{% url 'registro'%}" class="txt3">
+            REGISTRATE
+        </a>
+    </div>
+</form>
+
+{% endblock %}
+{% block footer %} <div style="background-color: chartreuse; text-align: center; color: black;">{{ mensaje }}</div>{% endblock %}
