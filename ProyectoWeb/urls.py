@@ -23,11 +23,12 @@ from django.urls.conf import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('AniversarioChaco.urls')),
-    # path('', include('RegistroUsuarios.urls')),
+    path('Usuario/', include('Usuario.urls')),
+        
     
 ]
 # prbando agregando codigo para hacer el ingreso usuario
 #Add Django site authentication urls (for login, logout, password management)
-urlpatterns += [
-    path('', include('django.contrib.auth.urls')),
-]
+# urlpatterns += [
+#     path('', include('django.contrib.auth.urls')),
+# ]

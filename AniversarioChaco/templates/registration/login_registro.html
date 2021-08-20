@@ -7,8 +7,8 @@
         Ingrese sus datos para registrarse
     </span>
 
-    {% if formulario.errors %}
-     
+    {% if formu.errors %}
+    
         <li>Su contraseña no puede asemejarse tanto a su otra información personal.</li>
         <li>Su contraseña debe contener al menos 8 caracteres.</li>
         <li>Su contraseña no puede ser completamente numérica.</li>
@@ -18,9 +18,9 @@
 
     {% csrf_token %}
 	 
-	{% for formulario in formulario %}
+	{% for formulario in formu %}
 	<td>
-    <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate={{ formulario.label_tag }}
+    <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20"  data-validate={{ formulario.label_tag }}
 		
         <input id="first-name" class="input100" {{ formulario }}
         <span class="focus-input100"></span>
@@ -45,5 +45,5 @@
     </div>
 </form>
 
-{% endblock %}
 {% block footer %} <div style="background-color: chartreuse; text-align: center; color: black;">{{ mensaje }}</div>{% endblock %}
+{% endblock %}

@@ -26,20 +26,23 @@ SECRET_KEY = 'django-insecure-@)z7u8^&58=jw#=k66&$u8h^hmljwc$+o29d&d(z&w^lg^6@$-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_DJANGO = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'AniversarioChaco',
+    
     
 ]
+INSTALLED_LOCAL = ['AniversarioChaco', 'Usuario']
+
+INSTALLED_APPS = INSTALLED_LOCAL + INSTALLED_DJANGO
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,7 +59,7 @@ ROOT_URLCONF = 'ProyectoWeb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # modifique la linea siguiente para poder hacer el login 
+        # modifique la linea siguiente para poder hacer redirigir cuando busque los templates (archivos html)
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -78,11 +81,14 @@ WSGI_APPLICATION = 'ProyectoWeb.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Aca agregamos postgresql
+        'NAME': 'MultipleChoice',
+        'USER': 'postgres',
+        'PASSWORD': 'Lgante03',
+        'HOST': '127.0.0.1',
+        'DATABASE_PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -123,7 +129,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-STATIC_DIR = (os.path.join(BASE_DIR, "static"),) #esto es para que te reconozca en la carpeta static las carpetas css y js de bootstrap
+# STATIC_DIR = (os.path.join(BASE_DIR, "static"),) #esto es para que te reconozca en la carpeta static las carpetas css y js de bootstrap
+# para que busque la carpeta static en otros sitios:
+STATICFILES_DIRES = [
+    BASE_DIR / 'static',
+    BASE_DIR / 'AniversarioChaco' /'static',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -135,8 +146,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # para redirigir el login (django espera que una vez ingresado el usuario se dirija a un template llamado accounts/profile pero lo podemos redirigir desde una url matriz comenzando con "/")
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 
-LOGIN_REDIRECT_URL = '/home'
-
+# from django.urls import reverse_lazy
+# LOGIN_REDIRECT_URL = reverse_lazy('/home/')
+LOGIN_REDIRECT_URL = '/home/'
+LOGOUT_REDIRECT_URL = '/home/'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+

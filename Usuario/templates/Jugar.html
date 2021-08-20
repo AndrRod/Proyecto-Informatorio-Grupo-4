@@ -1,0 +1,72 @@
+{% extends 'plantillaBASE.html'%}
+
+{% load static %}
+
+{% block title %} JUEGO {% endblock %} 
+
+{% block content %}
+<!-- condicional si no hay pregunta -->
+{% if pregunta is None %}
+
+<div class="container">
+    <div class="jumbotron my-4">
+        <h1>Ya haz respondido a todas las preguntas!! Mira el tablero de posiciones</h1>
+        <a href="{% url 'resultados_multiplechoice' %}">Ver tablero de posiciones</a>
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="container">
+    <div class="jumbotron my-4">
+        <h3> {{ pregunta.texto }}</h3>
+    </div>
+
+    <form action="" method="POST" class="form">
+        {% csrf_token %}
+        <input type="hidden" name="pregunta_pk" value="{{ pregunta.pk }}">
+
+        
+        {% for opciones in pregunta.opciones.all %}
+            <!-- la clase pregunta tiene relacion con elegir respuesta y accedemos related_name="opciones" para pasar todas las opcines de la pregunta -->
+            <input class="form-check-input" type= "radio" name="respuesta_pk" value="{{ opciones.pk }}" id="choice">
+
+            <label class="form-check-label" for= "choice">
+                {{ opciones.texto }}
+            </label>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-succes">
+            Enviar
+        </button>
+
+
+    </form>
+
+</div>
+
+{% endif %}
+
+
+
+{% endblock %} 
+
+
+
+
+<!-- 
+{% for preg in pregunta %}
+<p>
+
+    {{ preg }}
+    
+</p>
+
+    {% for respuestas in preg.preguntas.all %}
+    <p>{{ respuestas }}</p>
+    
+    {% endfor %}
+
+{% endfor %}
+ -->
