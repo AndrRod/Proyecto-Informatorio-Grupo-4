@@ -1,8 +1,8 @@
-from ProyectoWeb.AniversarioChaco.models import Usuarios
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import Http404
 from django.utils import tree
-from AniversarioChaco.models import Usuarios, Pregunta, PreguntasRespondidas
+from AniversarioChaco.models import Usuario, Pregunta, PreguntasRespondidas
 from django.shortcuts import redirect, render, get_object_or_404
 
 
@@ -16,7 +16,7 @@ from AniversarioChaco.views import *
 # va a crear o traer al usuario
 
 def tablero(request):
-	total_usuarios = Usuarios.objects.order_by('-puntajeTotal')[:10]
+	total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
 	contador = total_usuarios.count()
 
 	context = {
@@ -28,7 +28,7 @@ def tablero(request):
 	return render(request, 'resultados_multiplechoice.html', context)
 
 def Juego(request):
-    UsuarioJugador, created = Usuarios.objects.get_or_create(usuario=request.user)
+    UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
     # vamos a necesitar condicionales dentro de un formulario sino va a entrar en el else
     # si estamos enviando datos
     # hay que encontrar el identificador de la pregunta

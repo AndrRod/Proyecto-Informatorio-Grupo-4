@@ -56,7 +56,7 @@ class ElegirRespuesta(models.Model):
 
 
 
-class Usuarios(models.Model):
+class Usuario(models.Model):
     usuario = models.OneToOneField(User, on_delete=CASCADE)
     puntajeTotal = models.DecimalField(verbose_name='Pungaje Total', default=0, max_digits= 10, decimal_places=2)
     
@@ -110,7 +110,7 @@ class Usuarios(models.Model):
 #  y el puntaje sumara  
 # crear clase que va a guardar los intentos de preguntas
 class PreguntasRespondidas(models.Model):
-    usuarioPreg = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name='intentos')
+    usuarioPreg = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='intentos')
     # elminada una pregunta respondida que se elimine también la pregunta de la base de datos
     pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
     # intentos hechos
