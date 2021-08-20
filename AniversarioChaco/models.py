@@ -56,7 +56,7 @@ class ElegirRespuesta(models.Model):
 
 
 
-class Usuario(models.Model):
+class Usuarios(models.Model):
     usuario = models.OneToOneField(User, on_delete=CASCADE)
     puntajeTotal = models.DecimalField(verbose_name='Pungaje Total', default=0, max_digits= 10, decimal_places=2)
     
@@ -65,8 +65,8 @@ class Usuario(models.Model):
 
     # creamos los intentos y lo guardamos
     def crear_intento(self, pregunta):
-        intento = PreguntasRespondidas(pregunta= pregunta, usuarioPreg= self)
-        intento.save()
+        intentos = PreguntasRespondidas(pregunta= pregunta, usuarioPreg= self)
+        intentos.save()
     
     def obtener_Nuev_preguntas(self):
         # hacemos la relación con PreguntasRespondidas
@@ -95,13 +95,11 @@ class Usuario(models.Model):
             pregunta_respondida.respuesta = respuesta_seleccionada
 
         pregunta_respondida.save()
-
         self.actualizar_puntaje()
-
+    
 
     def actualizar_puntaje(self):
-        puntaje_actualizado = self.intentos.filter(correcto=True).aggregate(
-            models.Sum('puntajeObtenido'))['puntajeObtenido__sum']
+        puntaje_actualizado = self.intentos.filter(correcto=True).aggregate(models.Sum('puntajeObtenido'))['puntajeObtenido__sum']
 
         self.puntaje_total = puntaje_actualizado
         self.save()
@@ -112,7 +110,7 @@ class Usuario(models.Model):
 #  y el puntaje sumara  
 # crear clase que va a guardar los intentos de preguntas
 class PreguntasRespondidas(models.Model):
-    usuarioPreg = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='intentos')
+    usuarioPreg = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name='intentos')
     # elminada una pregunta respondida que se elimine también la pregunta de la base de datos
     pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
     # intentos hechos

@@ -10,6 +10,7 @@ from Usuario import views
 urlpatterns = [
     path('Juego/', views.Juego, name= 'Juego'),
     path('resultados_multiplechoice/', views.tablero, name='resultados_multiplechoice'),
-    path('resultados/', views.resultado_pregunta, name='resultado'),
+    # quiero que redireccione el resultado de la pregunta respondida a resultado.html
+    path('resultados/<int:pregunta_respondida_pk>/', views.resultado_pregunta, name='resultados/'),
     
 ]

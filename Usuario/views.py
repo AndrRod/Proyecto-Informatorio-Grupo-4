@@ -1,7 +1,8 @@
+from ProyectoWeb.AniversarioChaco.models import Usuarios
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import Http404
 from django.utils import tree
-from AniversarioChaco.models import Usuario, Pregunta, PreguntasRespondidas
+from AniversarioChaco.models import Usuarios, Pregunta, PreguntasRespondidas
 from django.shortcuts import redirect, render, get_object_or_404
 
 
@@ -15,7 +16,7 @@ from AniversarioChaco.views import *
 # va a crear o traer al usuario
 
 def tablero(request):
-	total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+	total_usuarios = Usuarios.objects.order_by('-puntajeTotal')[:10]
 	contador = total_usuarios.count()
 
 	context = {
@@ -27,17 +28,17 @@ def tablero(request):
 	return render(request, 'resultados_multiplechoice.html', context)
 
 def Juego(request):
-    UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
+    UsuarioJugador, created = Usuarios.objects.get_or_create(usuario=request.user)
     # vamos a necesitar condicionales dentro de un formulario sino va a entrar en el else
     # si estamos enviando datos
     # hay que encontrar el identificador de la pregunta
     # encontrar el id de esa pregunta
     # y si es correcto que se tome
     if request.method == "POST":
-        preg_pk = request.POST.get('pregunta_pk')
+        pregunta_pk = request.POST.get('pregunta_pk')
         # vamos a la clase PreguntasRespondidas para acceder a related_name='intentos'
         # con select_related vamos a tomar de pregunta para obtener el id de la pregunta
-        pregunta_respondida = UsuarioJugador.intentos.select_related("pregunta").get(pregunta__pk= preg_pk)
+        pregunta_respondida = UsuarioJugador.intentos.select_related("pregunta").get(pregunta__pk= pregunta_pk)
         respuesta_pk = request.POST.get('respuesta_pk')
         try:
             # así obtenemos la pregunta que seleccionamos, el identificador y si hay error nos manda al except  
@@ -46,7 +47,7 @@ def Juego(request):
             raise Http404
         
         UsuarioJugador.validar_intentos(pregunta_respondida, opcion_seleccionada)
-        return redirect("/Usuario/Juego", pregunta_respondida)
+        return redirect("/Usuario/resultados", pregunta_respondida.pk)
 
         
         
@@ -79,6 +80,7 @@ def Juego(request):
 
 
 def resultado_pregunta(request, pregunta_respondida_pk):
+    # si no obtiene el objeto nos devuelve error
 	respondida = get_object_or_404(PreguntasRespondidas, pk=pregunta_respondida_pk)
 
 	context = {
