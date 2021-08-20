@@ -15,12 +15,12 @@ from AniversarioChaco.views import *
 # va a crear o traer al usuario
 
 def tablero(request):
-	total_usaurios = Usuario.objects.order_by('-puntaje_total')[:10]
-	contador = total_usaurios.count()
+	total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+	contador = total_usuarios.count()
 
 	context = {
 
-		'usuario':total_usaurios,
+		'usuario': total_usuarios,
 		'contar_user':contador
 	}
 
@@ -46,7 +46,7 @@ def Juego(request):
             raise Http404
         
         UsuarioJugador.validar_intentos(pregunta_respondida, opcion_seleccionada)
-        return redirect("Juego.html", pregunta_respondida)
+        return redirect("/Usuario/Juego", pregunta_respondida)
 
         
         
@@ -84,7 +84,7 @@ def resultado_pregunta(request, pregunta_respondida_pk):
 	context = {
 		'respondida':respondida
 	}
-	return render(request, 'Juego.html', context)
+	return render(request, 'resultados.html', context)
 
 # esto iba en el else de la clase juego
 # Aca tomamos las respuestas respondidas y enlazarlas mediante el id, entramos a presguntasRespondidasUser,  y exxcluimos las preguntas (pk) respnodidas

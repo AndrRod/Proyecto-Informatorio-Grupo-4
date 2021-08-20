@@ -100,8 +100,8 @@ class Usuario(models.Model):
 
 
     def actualizar_puntaje(self):
-        puntaje_actualizado = self.intentos.filter(correcta=True).aggregate(
-            models.Sum('puntaje_obtenido'))['puntaje_obtenido__sum']
+        puntaje_actualizado = self.intentos.filter(correcto=True).aggregate(
+            models.Sum('puntajeObtenido'))['puntajeObtenido__sum']
 
         self.puntaje_total = puntaje_actualizado
         self.save()

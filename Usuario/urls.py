@@ -9,6 +9,7 @@ from Usuario import views
 
 urlpatterns = [
     path('Juego/', views.Juego, name= 'Juego'),
-    path('resultados_multiplechoice/', views.resultados, name='resultados_multiplechoice'),
+    path('resultados_multiplechoice/', views.tablero, name='resultados_multiplechoice'),
+    path('resultados/', views.resultado_pregunta, name='resultado'),
     
 ]
