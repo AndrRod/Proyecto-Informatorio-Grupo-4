@@ -24,8 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('AniversarioChaco.urls')),
     path('Usuario/', include('Usuario.urls')),
-        
-    
+    path('Adm/', include('Administrador.urls')),
 ]
 # prbando agregando codigo para hacer el ingreso usuario
 #Add Django site authentication urls (for login, logout, password management)

@@ -1,10 +1,10 @@
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import Http404
-from django.utils import tree
+
 from AniversarioChaco.models import Usuario, Pregunta, PreguntasRespondidas
 from django.shortcuts import redirect, render, get_object_or_404
-
+from django.contrib.auth.models import User
 
 from AniversarioChaco.views import *
 
@@ -38,7 +38,7 @@ def Juego(request):
         pregunta_pk = request.POST.get('pregunta_pk')
         # vamos a la clase PreguntasRespondidas para acceder a related_name='intentos'
         # con select_related vamos a tomar de pregunta para obtener el id de la pregunta
-        pregunta_respondida = UsuarioJugador.intentos.select_related("pregunta").get(pregunta__pk= pregunta_pk)
+        pregunta_respondida = UsuarioJugador.intentos.select_related('pregunta').get(pregunta__pk= pregunta_pk)
         respuesta_pk = request.POST.get('respuesta_pk')
         try:
             # así obtenemos la pregunta que seleccionamos, el identificador y si hay error nos manda al except  
@@ -47,9 +47,7 @@ def Juego(request):
             raise Http404
         
         UsuarioJugador.validar_intentos(pregunta_respondida, opcion_seleccionada)
-        return redirect("/Usuario/resultados", pregunta_respondida.pk)
-
-        
+        return redirect('resultados', pregunta_respondida.pk)
         
         # validar nuestro intento
 
@@ -75,8 +73,6 @@ def Juego(request):
 
 
 
-# def resultados(request):
-#     return render(request, "resultados_multiplechoice.html")
 
 
 def resultado_pregunta(request, pregunta_respondida_pk):

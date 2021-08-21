@@ -5,20 +5,20 @@ from .models import Pregunta, ElegirRespuesta, PreguntasRespondidas
 
 
 
-# esta clas hay que llevarla al admin
+# esta class hay que llevarla al admin
 class ElegirInlineFormSet(forms.BaseInlineFormSet):
     def clean(self):
         super(ElegirInlineFormSet, self).clean()
 
         respuesta_correcta = 0
 
-# aca tengo ERROR
+
         for formulario in self.forms:
-            if formulario.is_valid():
-                return
             if not formulario.is_valid():
-                if formulario.cleaned_data and formulario.cleaned_date.get('correcta') is True:
-                    respuesta_correcta += 1
+                return
+            
+            if formulario.cleaned_data and formulario.cleaned_data.get('correcta') is True:
+                respuesta_correcta += 1
             
         try:
             # esto es para determinar el máximo de respuestas permitidas
@@ -28,12 +28,13 @@ class ElegirInlineFormSet(forms.BaseInlineFormSet):
 # si en el formulario obtenemos 'correcta' es true (es decir si es correcta la respuesta) va a sumar al acumulador
 
 
-# progando alternativa a formulario de inicio
 
 
 
+# probando alternativa a formulario de inicio
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, get_user_model
+
 
 
 # modelo User

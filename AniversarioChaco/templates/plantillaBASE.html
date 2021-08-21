@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--===============================================================================================-->	
-	  <link rel="icon" type="image/png" href="{% static 'Login/images/icons/icono-chaco.jpg' %}"/>
+	  <link rel="icon" type="image/png" href="{% static 'Login/images/icons/icono-chaco.png' %}"/>
   <!--===============================================================================================-->
+  
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'AniversarioChaco\css\bootstrap.css' %}">
 </head>
@@ -30,7 +31,7 @@
             </a>
                 
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Cargar preguntas</a></li>
+              <li><a class="dropdown-item" href="{% url 'agregar' %}">Cargar preguntas</a></li>
               <li><a class="dropdown-item" href="#">Consultar estadisticas</a></li>
               
             </ul>

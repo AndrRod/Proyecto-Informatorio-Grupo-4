@@ -7,33 +7,22 @@
 {% block content %}
 
 
+
 <div class="container">
 	
 	<h1 class="text-center my-4"> 
 		<span class="">
 			
-			<p>Los {{contar_user}} mejores jugadores</p>
+		
 			
 		</span>
 	</h1>
 	
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Posicion</th>
-				<th>Usuario</th>
-				<th>Puntaje</th>
-			</tr>
-		</thead>
+	<table class="table table-striped table-bodered">
+		
 		<tbody>
-			{% for user in usuario %}
-				<tr>
-					<th>{{forloop.counter}}</th>
-					<th>{{user.usuario.username}}</th>
-					<th>{{user.puntajeTotal}}</th>
-				</tr>
-			{% endfor %}
+			
 		</tbody>
 	</table>
 

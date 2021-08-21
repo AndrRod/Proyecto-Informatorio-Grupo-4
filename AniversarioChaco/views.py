@@ -41,10 +41,6 @@ def home(request):
 def Contacto(request):
     return render(request, "Contacto.html")
 
-# html que pueden servir para el proyecto
-
-# def resultados_t(request):
-#     return render(request, "resultados_multiplechoice.html")
 
 
 
@@ -54,15 +50,6 @@ def Contacto(request):
     
 # importamos el formulario de registro que creamos en form.py
 from .form import RegistroFromulario, UsuarioLoginFormulario
-
-# este es el registro que viene por defencto en django
-# form = UserCreationForm(request.POST)
-
-# crear usuario y guardarlo en un grupo determinado
-# user = form.save()
-# group = Group.objects.get(name="Grupo Jugadores")
-# user.groups.add(group)
-
 
 
 # login basado en funciones
@@ -88,6 +75,57 @@ def registro(request):
     contexto = {'formu': form, 'mensaje': mensaje}                    
             
     return render(request, "registration/login_registro.html", contexto)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# este es el registro que viene por defencto en django
+# form = UserCreationForm(request.POST)
+
+# crear usuario y guardarlo en un grupo determinado
+# user = form.save()
+# group = Group.objects.get(name="Grupo Jugadores")
+# user.groups.add(group)
+
+
+
+
+
+
 
 
 

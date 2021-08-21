@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 import random
 
-from django.utils import tree
+
 
 # ver video https://www.youtube.com/watch?v=OHKS9oXPqy0&list=PLZyaZrHcg9P7RWc5IotQNwQfVZVAnpySe&index=5&ab_channel=DevDjango
 # al final explica todo
@@ -26,7 +26,7 @@ class Pregunta(models.Model):
     # creamos atributo puntaje maximo que va a estar por defecto en 3
     # y con verbose_name ponemos como queremos que se vea en el panel de administracion
     
-    max_puntaje = models.DecimalField(verbose_name= "Maximo Puntaje", default= 3, decimal_places=2, max_digits=6)
+    max_puntaje = models.DecimalField(verbose_name= "Maximo Puntaje", default= 2, decimal_places=2, max_digits=6)
 
     def __str__(self):
         return self.texto
@@ -99,9 +99,9 @@ class Usuario(models.Model):
     
 
     def actualizar_puntaje(self):
-        puntaje_actualizado = self.intentos.filter(correcto=True).aggregate(models.Sum('puntajeObtenido'))['puntajeObtenido__sum']
+        puntaje_actualizado = self.intentos.filter(correcta=True).aggregate(models.Sum('puntajeObtenido'))['puntajeObtenido__sum']
 
-        self.puntaje_total = puntaje_actualizado
+        self.puntajeTotal = puntaje_actualizado
         self.save()
 
 
@@ -110,12 +110,12 @@ class Usuario(models.Model):
 #  y el puntaje sumara  
 # crear clase que va a guardar los intentos de preguntas
 class PreguntasRespondidas(models.Model):
-    usuarioPreg = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='intentos')
+    usuarioPreg = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='intentos', null=False)
     # elminada una pregunta respondida que se elimine también la pregunta de la base de datos
     pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
     # intentos hechos
     respuesta = models.ForeignKey(ElegirRespuesta, on_delete=models.CASCADE, null=True)
-    correcto = models.BooleanField(verbose_name='Es esta la respuesta correcta?', default=False, null= False)
+    correcta = models.BooleanField(verbose_name='Es esta la respuesta correcta?', default=False, null= False)
     # puntaje que por defecta será cero
     puntajeObtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, max_digits=6, decimal_places=2)
 

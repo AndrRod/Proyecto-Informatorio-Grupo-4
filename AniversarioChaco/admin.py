@@ -32,12 +32,12 @@ class PreguntaAdmin(admin.ModelAdmin):
 
 # como se vera en panalla las preguntas respondidas
 class PreguntasRespondidasAdmin(admin.ModelAdmin):
-    list_display = ['pregunta', 'respuesta', 'correcto', 'puntajeObtenido']
+    list_display = ['pregunta', 'respuesta', 'correcta', 'puntajeObtenido']
 
     class Meta:
         model = PreguntasRespondidas
 
+admin.site.register(PreguntasRespondidas, PreguntasRespondidasAdmin)
 admin.site.register(Pregunta, PreguntaAdmin)
 admin.site.register(ElegirRespuesta)
-admin.site.register(PreguntasRespondidas, PreguntasRespondidasAdmin)
 admin.site.register(Usuario)

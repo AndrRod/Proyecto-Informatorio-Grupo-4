@@ -5,8 +5,12 @@
 {% block title %} JUEGO {% endblock %} 
 
 {% block content %}
+
+
+
 <!-- condicional si no hay pregunta -->
 {% if pregunta is None %}
+
 
 <div class="container">
     <div class="jumbotron my-4">
@@ -32,22 +36,18 @@
         {% for opciones in pregunta.opciones.all %}
             <!-- la clase pregunta tiene relacion con elegir respuesta y accedemos related_name="opciones" para pasar todas las opcines de la pregunta -->
         <p> 
-
-        
-            
             <input class="form-check-input" type= "radio" name="respuesta_pk" value="{{ opciones.pk }}" id="choice-{{forloop.counter}}">
-            
+
             <label class="form-check-label" for= "choice-{{forloop.counter}}">
                 {{ opciones.texto }}
             </label>
-            
         </p>
         {% endfor %}
 
         <button type="submit" class="btn btn-md btn-outline-secondary">
             Enviar
         </button>
-        
+
 
     </form>
 

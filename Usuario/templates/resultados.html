@@ -6,22 +6,27 @@
 
 {% block content %}
 
+
 <div class="container">
 	
-	<div class="jumbotron my-4">
-		<h3 class="text-info">{{respondida.pregunta.texto|safe}}</h3>
+	<p>
+		<strong>La pregunta:</strong>
+	{{respondida.pregunta.texto|safe}}
+	</div>
+	<div class="container">
+		<h3 class="text-info"></h3>
 		<p>
 			<strong>Tu respuesta:</strong>
 			{{respondida.respuesta.texto|safe}}
 		</p>
 
-
+		
 	{% if respondida.respuesta.correcta %}
-		<h4 class="text-success">Yeah!! Tu respuesta es correcta</h4>
+		<h4 class="text-success">Bien hecho!!!! Tu respuesta es correcta</h4>
 	{% else %}
 		<h4 class="text-danger">Tu respuesta es incorrecta!!!</h4>
 
-		{% for respuesta in respondida.pregunta.opciones.all %}
+		{% for respuesta in respondidas.pregunta.opciones.all %}
 
 			{% if respuesta.correcta %}
 
@@ -33,7 +38,7 @@
 
 	{% endif %}
 
-	<a href="{% url 'jugar' %}">
+	<a href="{% url 'Juego' %}">
 		<button class="btn-success">
 			Continuar con la siguiente pregunta
 		</button>
@@ -43,6 +48,7 @@
 
 
 </div>
+
 
   {% endblock %}
 

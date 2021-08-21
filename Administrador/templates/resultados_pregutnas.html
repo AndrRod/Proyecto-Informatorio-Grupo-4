@@ -18,7 +18,7 @@
 	</h1>
 	
 
-	<table class="table">
+	<table class="table table-striped table-bodered">
 		<thead>
 			<tr>
 				<th>Posicion</th>
@@ -27,11 +27,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for user in usuario %}
+			{% for user_quiz in Usuario %}
 				<tr>
 					<th>{{forloop.counter}}</th>
-					<th>{{user.usuario.username}}</th>
-					<th>{{user.puntajeTotal}}</th>
+					<th>{{user_quiz.usuario.username}}</th>
+					<th>{{user_quiz.puntajeTotal}}</th>
 				</tr>
 			{% endfor %}
 		</tbody>

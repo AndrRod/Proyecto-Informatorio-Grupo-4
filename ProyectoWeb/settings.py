@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@)z7u8^&58=jw#=k66&$u8h^hmljwc$+o29d&d(z&w^lg^6@$-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True    
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_DJANGO = [
     
     
 ]
-INSTALLED_LOCAL = ['AniversarioChaco', 'Usuario']
+INSTALLED_LOCAL = ['AniversarioChaco', 'Usuario', 'Administrador']
 
 INSTALLED_APPS = INSTALLED_LOCAL + INSTALLED_DJANGO
 
@@ -146,8 +146,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # para redirigir el login (django espera que una vez ingresado el usuario se dirija a un template llamado accounts/profile pero lo podemos redirigir desde una url matriz comenzando con "/")
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 
-# from django.urls import reverse_lazy
-# LOGIN_REDIRECT_URL = reverse_lazy('/home/')
+from django.urls import reverse_lazy
+LOGIN_REDIRECT_URL = reverse_lazy('/home/')
 LOGIN_REDIRECT_URL = '/home/'
 LOGOUT_REDIRECT_URL = '/home/'
 
