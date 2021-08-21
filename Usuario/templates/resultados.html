@@ -11,7 +11,8 @@
 	
 	<p>
 		<strong>La pregunta:</strong>
-	{{respondida.pregunta.texto|safe}}
+	
+{{respondida.pregunta.texto|safe}}
 	</div>
 	<div class="container">
 		<h3 class="text-info"></h3>
@@ -26,7 +27,7 @@
 	{% else %}
 		<h4 class="text-danger">Tu respuesta es incorrecta!!!</h4>
 
-		{% for respuesta in respondidas.pregunta.opciones.all %}
+		{% for respuesta in respondida.pregunta.opciones.all %}
 
 			{% if respuesta.correcta %}
 
