@@ -2,19 +2,14 @@
 <!-- ahora hay que colocar que herede de plantilla base -->
 <!-- que cargue todo lo que hay en carpeta static -->
 {% load static %}
-{% block title %}CARGAR PREGUNTAS{% endblock %}
+{% block title %}RESULTADOS{% endblock %}
 
 {% block content %}
-
-<form action="">
-{% for a in agregarPreg %}
-	<p>{{ a.as_p }}</p>
-</form>
 
 
 {% endfor %}
 
-
+{{ Usuario }}
 {% endblock %}
 
 

@@ -42,15 +42,15 @@ User = get_user_model()
 
 class RegistroFromulario(UserCreationForm):
     email = forms.EmailField(required=True)
-    nombre = forms.CharField(required=True)
-    apellido = forms.CharField(required=True)
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
 
     class Meta:
         model = User
         # indicar que formularios queremos agregar y en que orden ser renderizado
         fields = [
-            'nombre',
-            'apellido',
+            'first_name',
+            'last_name',
             'username',
             'password1',
             'password2',
@@ -64,7 +64,21 @@ class RegistroFromulario(UserCreationForm):
 
 
 
+
+# Probando clase formulario para crear preguntas
+
+class AdminPregForm(forms.ModelForm):
+    class Meta:
+    #  model hace referencia al modelo que va a pertenecer
+        model = Pregunta
+    #  fields hace referencia a todos los campos que tiene el modelo que van a ser rellenados cuando creemos una nueva pregunta en este caso
+        fields = ['texto']
+
  
+
+
+
+
 
 
 

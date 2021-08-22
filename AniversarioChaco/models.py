@@ -115,9 +115,11 @@ class PreguntasRespondidas(models.Model):
     pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
     # intentos hechos
     respuesta = models.ForeignKey(ElegirRespuesta, on_delete=models.CASCADE, null=True)
-    correcta = models.BooleanField(verbose_name='Es esta la respuesta correcta?', default=False, null= False)
+    # default false, es que por defecto no viene seleccionada
+    correcta = models.BooleanField(verbose_name='Es esta la respuesta correcta?', default=False, null=False)
     # puntaje que por defecta será cero
     puntajeObtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, max_digits=6, decimal_places=2)
 
 
 # Vamos a crear un formulario con python form.py
+

@@ -1,9 +1,8 @@
-
-from django import forms
+import django
 from django.db.models import fields
 from django.http.response import FileResponse
 from django.shortcuts import redirect, render, HttpResponse
-
+from django import forms
 
 # 09/08/2021 
 # importa: formulario de django, modelo de usuario predeterminado y formulario de creacion de usuario
@@ -25,26 +24,28 @@ from django.contrib.auth.models import Group
 
 # para restringir el ingreso
 from django.contrib.auth.decorators import login_required
-# @login_required(redirect_field_name='login')
+# @login_required(redirect_field_name='login') # para resgringir el ingreso
 
+#Probando una vista basada en clases
+# TemplateView hereda de View
+# por lo que internamente hace return render(request, template_name)
 
+from django.views.generic import View, TemplateView
+from django.views.generic.list import ListView
 
-# para resgringir el ingreso
+# class home(TemplateView):
+#      template_name = "home.html"
 
+# vista basa de clase
 def home(request):
     return render(request, "home.html")
-
-
-
 
 
 def Contacto(request):
     return render(request, "Contacto.html")
 
-
-
-
-
+# class Contacto(TemplateView):
+#      template_name = "Contacto.html"
 
     
     
@@ -224,3 +225,16 @@ def registro(request):
 
 # estudiar CreateView
 # addView para actualizar cosas
+
+
+
+# -_____------------------------------------------------------
+# Listview también hereda de view
+
+""" 
+class lista(ListView):
+    template_name = 
+    queryset = hace por defecto Model.object.all()
+    contex_object_name = por defecto es object_list  y con esto podemos darle un nombre distinto
+
+"""

@@ -16,16 +16,17 @@ from AniversarioChaco.views import *
 # va a crear o traer al usuario
 
 def tablero(request):
-	total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
-	contador = total_usuarios.count()
+    
+    total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+    contador = total_usuarios.count()
 
-	context = {
+
+    context = {
 
 		'usuario': total_usuarios,
 		'contar_user':contador
 	}
-
-	return render(request, 'resultados_multiplechoice.html', context)
+    return render(request, 'resultados_multiplechoice.html', context)
 
 def Juego(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)

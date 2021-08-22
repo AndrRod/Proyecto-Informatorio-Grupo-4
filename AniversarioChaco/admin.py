@@ -1,8 +1,12 @@
 from django.contrib import admin
+from django.db.models import fields
 
 # Register your models here.
 from .models import Pregunta, ElegirRespuesta, PreguntasRespondidas, Usuario
 from .form import ElegirInlineFormSet
+from django import forms
+
+
 
 
 # Register your models here.
@@ -27,7 +31,15 @@ class PreguntaAdmin(admin.ModelAdmin):
     # campos de busqueda
     # agregar el related_name de ElegirRespuesta en pregunta
     # preguntas__texto por si alguien quire encontrar una posible respuesta
-    search_fields = ['texto', 'preguntas__texto']
+    search_fields = ['texto', 'pregunta__texto']
+    class Meta:
+        #  model hace referencia al modelo que va a pertenecer
+        model = Pregunta
+        #  fields hace referencia a todos los campos que tiene el modelo que van a ser rellenados cuando creemos una nueva pregunta en este caso
+        fields = '__all__'
+
+
+
 
 
 # como se vera en panalla las preguntas respondidas
