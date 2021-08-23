@@ -6,27 +6,53 @@
 
 {% block content %}
 
+<div class="container-fluid py-5 " style="background-color:#00ad5f">
+
+    <div class="container text-dark">
+        <p class="display-4"><b>Cargar respuesta a la Preguntas creadas</b> </p>
+     
+        
+
+    </div>
+</div>
 
 
-<form action="#" method="POST" class="py-5">
-	
-	
-	{% csrf_token %}
-	<p>{{ form.pregunta }}</p>
-    <p>{{ form.correcta }}</p>
-    <p>{{ form.texto }}</p>
-    <p>{{ form.correcta }}</p>
-    <p>{{ form.texto }}</p>
-    <p>{{ form.correcta }}</p>
-    <p>{{ form.texto }}</p>
-    <p>{{ form.correcta }}</p>
-    <p>{{ form.texto }}</p>
-		
-		
+<div class="container py-4">
+ 
+    
+     
+    <div class="row">
+     
+      <div class="col-sm-4">
+        <form action="#" method="POST" class="py-5">
+            
+            
+            {% csrf_token %}
+            <p>{{ form.pregunta.label }}</p>
+            <p>{{ form.pregunta }}</p>
+            <div>
+                <p>{{ form.correcta.label }} {{ form.correcta }}</p>
+                <p>{{ form.texto }}</p>
+            </div>
+            <div>
+                <p>{{ form.correcta.label }} {{ form.correcta }}</p>
+                <p>{{ form.texto }}</p>
+            </div>
+            <div>
+                <p>{{ form.correcta.label }} {{ form.correcta }}</p>
+                <p>{{ form.texto }}</p>
+            </div>
+            <div>
+                <p>{{ form.correcta.label }} {{ form.correcta }}</p>
+                <p>{{ form.texto }}</p>
+            </div>
+                
 
-	 <button type="submit" class="">Crear Respuesta</button>
-</form>
-
+            <button type="submit" class="">Crear Respuesta</button>
+        </form>
+    </div>
+    </div>
+</div>
 
 
 {% endblock %}

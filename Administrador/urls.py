@@ -12,7 +12,7 @@ from django.contrib.auth import views as authViews
 
 urlpatterns = [
      path('agregar/', views.CrearPreg.as_view(), name="agregar"),
-     path('pregunta_creada/', views.pregunta_creada.as_view(), name="pregunta_creada"),
+     path('respuestas/', views.pregunta_creada.as_view(), name="respuestas"),
     
     
 ]
