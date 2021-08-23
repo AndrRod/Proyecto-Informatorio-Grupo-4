@@ -6,13 +6,22 @@
 
 {% block content %}
 
-<form action="">
-{% for a in agregarPreg %}
-	<p>{{ a.as_p }}</p>
+<h1>Creacion de Preguntas</h1>
+
+
+<form action="#" method="POST">
+	{% for f in form %}
+	
+	{% csrf_token %}
+	<p>{{ f.label }}</p>
+		<p>{{ f }}</p>
+	 {% endfor %}
+		
+
+	 <button type="submit">Crear Pregunta</button>
 </form>
 
 
-{% endfor %}
 
 
 {% endblock %}

@@ -62,17 +62,25 @@ class RegistroFromulario(UserCreationForm):
 # forms.Form = Es un formulario sin base
 # modelFoms = hereda de un formulario base
 
+# from AniversarioChaco.admin import PreguntaAdmin
 
 
+# Probando clase formulario para crear
 
-# Probando clase formulario para crear preguntas
-
-class AdminPregForm(forms.ModelForm):
+class AdminPreguntaForm(forms.ModelForm):
     class Meta:
     #  model hace referencia al modelo que va a pertenecer
         model = Pregunta
     #  fields hace referencia a todos los campos que tiene el modelo que van a ser rellenados cuando creemos una nueva pregunta en este caso
-        fields = ['texto']
+        fields = '__all__'
+
+
+class AdminRespuestaForm(forms.ModelForm):
+    class Meta:
+    #  model hace referencia al modelo que va a pertenecer
+        model = ElegirRespuesta
+    #  fields hace referencia a todos los campos que tiene el modelo que van a ser rellenados cuando creemos una nueva pregunta en este caso
+        fields = '__all__'
 
  
 

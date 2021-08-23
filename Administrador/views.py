@@ -1,16 +1,17 @@
 
-from django.db.models import fields
+
+
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from AniversarioChaco.models import Usuario, Pregunta, PreguntasRespondidas, ElegirRespuesta
 # Create your views here.
-from AniversarioChaco.form import AdminPregForm
+from AniversarioChaco.form import *
 # heredando de mixins se puede restringir la pagina
-from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.contrib.auth.mixins import LoginRequiredMixin
 
 # heredar la clase ListView y atributos 
 from django.views.generic import ListView, CreateView, UpdateView
-
+from AniversarioChaco import form
 # probando si puedo usar el modelo de admin de AniversarioChaco
 
 
@@ -41,15 +42,23 @@ class agregar(ListView):
         return usuario
     """
 from django.urls import reverse_lazy
+from AniversarioChaco.admin import ElegirRespuesta
 
-class AdminPregForm(CreateView):
+class CrearPreg(CreateView):
     template_name = "cargar_preguntas.html"
     model = Pregunta
-    context_object_name = "agregarPreg"
+    from_class = AdminPreguntaForm    
+    # en teoria trabaja por defecto con el nombre que esté en el template
+    # context_object_name = "agregarPreg"
     fields = '__all__'
-    # redirecciona
+    # # redirecciona
     success_url = reverse_lazy('pregunta_creada')
     
 
-class pregunta_creada(TemplateView):
+class pregunta_creada(CreateView):
+    model = ElegirRespuesta
+    from_class = AdminRespuestaForm   
+    # context_object_name = 'respuestas'
     template_name = "pregunta_creada.html"
+    fields = '__all__'
+    success_url = reverse_lazy('agregar')

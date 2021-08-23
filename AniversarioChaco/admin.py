@@ -32,11 +32,8 @@ class PreguntaAdmin(admin.ModelAdmin):
     # agregar el related_name de ElegirRespuesta en pregunta
     # preguntas__texto por si alguien quire encontrar una posible respuesta
     search_fields = ['texto', 'pregunta__texto']
-    class Meta:
-        #  model hace referencia al modelo que va a pertenecer
-        model = Pregunta
-        #  fields hace referencia a todos los campos que tiene el modelo que van a ser rellenados cuando creemos una nueva pregunta en este caso
-        fields = '__all__'
+    
+    
 
 
 

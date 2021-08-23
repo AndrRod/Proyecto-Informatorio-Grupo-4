@@ -7,9 +7,28 @@
 {% block content %}
 
 
-{% endfor %}
 
-{{ Usuario }}
+<form action="#" method="POST" class="py-5">
+	
+	
+	{% csrf_token %}
+	<p>{{ form.pregunta }}</p>
+    <p>{{ form.correcta }}</p>
+    <p>{{ form.texto }}</p>
+    <p>{{ form.correcta }}</p>
+    <p>{{ form.texto }}</p>
+    <p>{{ form.correcta }}</p>
+    <p>{{ form.texto }}</p>
+    <p>{{ form.correcta }}</p>
+    <p>{{ form.texto }}</p>
+		
+		
+
+	 <button type="submit" class="">Crear Respuesta</button>
+</form>
+
+
+
 {% endblock %}
 
 
