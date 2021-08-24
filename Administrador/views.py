@@ -1,7 +1,3 @@
-
-
-
-
 from django.shortcuts import get_object_or_404, render
 from django.urls.base import reverse
 from django.views.generic.base import TemplateView
@@ -143,5 +139,7 @@ class Modif_pregunta_creada(UpdateView):
         return reverse('agregar')
 
 """    
+
+
 def resulPreguntas(request):
     return render(request, 'resultados_preguntas.html')

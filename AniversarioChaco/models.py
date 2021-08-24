@@ -7,9 +7,6 @@ import random
 
 
 
-# ver video https://www.youtube.com/watch?v=OHKS9oXPqy0&list=PLZyaZrHcg9P7RWc5IotQNwQfVZVAnpySe&index=5&ab_channel=DevDjango
-# al final explica todo
-
 # Create your models here.
 
 # Create your models here.
