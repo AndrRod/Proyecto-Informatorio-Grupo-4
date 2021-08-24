@@ -27,6 +27,8 @@ class Pregunta(models.Model):
     # y con verbose_name ponemos como queremos que se vea en el panel de administracion
     
     max_puntaje = models.DecimalField(verbose_name= "Maximo Puntaje", default= 2, decimal_places=2, max_digits=6)
+    class Meta:
+        verbose_name ="pregunta"
 
     def __str__(self):
         return self.texto
@@ -58,7 +60,7 @@ class ElegirRespuesta(models.Model):
 
 class Usuario(models.Model):
     usuario = models.OneToOneField(User, on_delete=CASCADE)
-    puntajeTotal = models.DecimalField(verbose_name='Pungaje Total', default=0, max_digits= 10, decimal_places=2)
+    puntajeTotal = models.DecimalField(verbose_name='Pungaje Total', default=0, max_digits= 10, decimal_places=2, null=True)
     
 
     # creamos funcionalidades de la aplicacion:

@@ -12,10 +12,12 @@ from django.contrib.auth import views as authViews
 
 urlpatterns = [
      path('agregar/', views.CrearPreg.as_view(), name="agregar"),
-     path('respuestas/', views.pregunta_creada.as_view(), name="respuestas"),
+     path('resultados/', views.resulPreguntas, name="resultPreg"),
+     path('actualizar/', views.Modif_pregunta_creada.as_view(), name="actualizar"),
     
     
 ]
+
     # path('tabla/', views.tabla, name="tabla"),
     # path('agregarp/', views.agregar.as_view(), name="agregarp"),
 
