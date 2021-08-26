@@ -45,7 +45,7 @@ def Juego(request):
             # así obtenemos la pregunta que seleccionamos, el identificador y si hay error nos manda al except  
             opcion_seleccionada = pregunta_respondida.pregunta.opciones.get(pk=respuesta_pk)
         except ObjectDoesNotExist:
-            return redirect('Juego')
+            return redirect('Jugar')
         
         UsuarioJugador.validar_intentos(pregunta_respondida, opcion_seleccionada)
         return redirect('resultados', pregunta_respondida.pk)

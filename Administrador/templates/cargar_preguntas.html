@@ -24,7 +24,7 @@
      
       <div class="col-sm-4">
 
-		<form action="#" method="GET" class="py-4">
+		<form action="#" method="POST" class="py-4">
 			{% for f in form %}
 			
 			
@@ -34,10 +34,13 @@
 				<p>{{ f }}</p>
 			{% endfor %}
 			{% csrf_token %}	
+			
 			{{ pregunta.as_p }}
 				
 
 			<button type="submit">Crear Pregunta</button>
+
+			<button> <a href="{% url 'listaPreg' %}">Editar Preguntas </a></button>
 		</form>
 		</div>
 	</div>

@@ -5,6 +5,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 import random
 
+from django.urls.base import reverse
+
 
 
 # Create your models here.
@@ -26,6 +28,9 @@ class Pregunta(models.Model):
     max_puntaje = models.DecimalField(verbose_name= "Maximo Puntaje", default= 2, decimal_places=2, max_digits=6)
     class Meta:
         verbose_name ="pregunta"
+
+    # def get_absolute_url(self):
+    #     return reverse('detalle_pregunta', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.texto

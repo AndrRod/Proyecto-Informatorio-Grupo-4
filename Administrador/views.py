@@ -1,9 +1,14 @@
+from django.core.checks import messages
+from django.http.response import HttpResponseRedirect
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import FormView
+from AniversarioChaco.admin import PreguntasRespondidasAdmin
 from django.shortcuts import get_object_or_404, render
 from django.urls.base import reverse
 from django.views.generic.base import TemplateView
 from AniversarioChaco.models import Usuario, Pregunta, PreguntasRespondidas, ElegirRespuesta
 # Create your views here.
-from AniversarioChaco.form import *
+from Administrador.form import AdminRespuestaForm, AdminPreguntaForm
 # heredando de mixins se puede restringir la pagina
 # from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -40,7 +45,7 @@ class agregar(ListView):
         return usuario
     """
 from django.urls import reverse_lazy
-from AniversarioChaco.admin import ElegirRespuesta, ElegirRespuestaAdmin, PreguntaAdmin
+# from AniversarioChaco.admin import ElegirRespuesta, ElegirRespuestaAdmin, PreguntaAdmin
 from django.forms.models import inlineformset_factory
 
 
@@ -48,11 +53,14 @@ ElegirResFormset = inlineformset_factory(
     Pregunta, ElegirRespuesta, fields=('pregunta', 'correcta', "texto")
 )
 
-"""
+RespuestasPreguntaFormSet = inlineformset_factory(
+    Pregunta, ElegirRespuesta, fields=('pregunta', 'correcta', "texto")
+)
+
 class CrearPreg(CreateView):
     template_name = "cargar_preguntas.html"
     model = Pregunta
-    from_class = PreguntaAdmin
+    from_class = RespuestasPreguntaFormSet
     # en teoria trabaja por defecto con el nombre que esté en el template
     # context_object_name = "agregarPreg"
     # inlines = (ElegirRespuestaAdmin,)
@@ -60,7 +68,7 @@ class CrearPreg(CreateView):
     # # redirecciona
     success_url = reverse_lazy('pregunta_creada')
     
-
+"""
 class pregunta_creada(CreateView):
     model = ElegirRespuesta
     from_class = ElegirRespuestaAdmin
@@ -68,12 +76,13 @@ class pregunta_creada(CreateView):
     template_name = "pregunta_creada.html"
     fields = '__all__'
     success_url = reverse_lazy('agregar')
-"""
+
 
 class CrearPreg(CreateView):
     template_name = "cargar_preguntas.html"
     model = Pregunta
-    fields = '__all__'
+    fields = ['texto']
+    
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
@@ -95,12 +104,17 @@ class CrearPreg(CreateView):
     def get_success_url(self):
         return reverse("agregar")
 
+"""
+
 
 
 class Modif_pregunta_creada(UpdateView):
     template_name = "modif_pregunta_creada.html"
     model = Pregunta
-    fields = '__all__'
+    fields = ['texto']
+    
+
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
@@ -122,24 +136,61 @@ class Modif_pregunta_creada(UpdateView):
             pregunta.save()
 
         return super().form_valid(form)
+        # return HttpResponseRedirect(self.get_success_url())
+    # def get_success_url(self):
+    #     return reverse('lista_preguntas')
+
+
     def get_success_url(self):
-        return reverse("actualizar")
+        return reverse("ListaPreg")
+
+
+
+class ListaPreg(ListView):
+    model = Pregunta
+    template_name = "lista_preguntas.html"
+    
+
+
+class respuestasDetailView(DetailView):
+    model = Pregunta
+    template_name = "respuestas_detalle.html"
 
 
 
 """ 
-class Modif_pregunta_creada(UpdateView):
-    model = ElegirRespuesta
-    from_class = ElegirRespuestaAdmin
-    # context_object_name = 'respuestas'
+from django.views.generic.detail import SingleObjectMixin
+
+class Modif_pregunta_creada(SingleObjectMixin, FormView):    
+    model = Pregunta
     template_name = "modif_pregunta_creada.html"
-    fields = '__all__'
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Pregunta.objects.all())
+        return super().get(request, *args, **kwargs)
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Pregunta.objects.all())
+        return super().get(request, *args, **kwargs)
+
+    def get_form(self, form_class: None):
+        return RespuestasPreguntaFormSet(**self.get_form_kwargs(), instance= self.object)
+    
+    def form_valid(self, form):
+        form.save()
+        
+        messages.add_message(
+
+            self.request,
+            messages.SUCCESS,
+            "Los cambios fueron salvados"
+
+        )
+        return HttpResponseRedirect(self.get_success_url())
     def get_success_url(self):
-        return reverse('agregar')
+        return reverse('modificar')
 
-"""    
 
+"""
 
 def resulPreguntas(request):
     return render(request, 'resultados_preguntas.html')

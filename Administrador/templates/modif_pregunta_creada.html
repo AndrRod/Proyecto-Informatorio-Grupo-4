@@ -9,7 +9,7 @@
 <div class="container-fluid py-5 " style="background-color:#00ad5f">
 
     <div class="container text-dark">
-        <p class="display-4"><b>Cargar preguntas</b> </p>
+        <p class="display-4"><b>Modificar Pregunta: </b> </p>
      
         
 
@@ -25,19 +25,24 @@
       <div class="col-sm-4">
 
 		<form action="#" method="POST" class="py-4">
-			{% for f in form %}
+			{% if pregunta|length < 1%}
+				<p>Agrega preguntas no hay ninguna</p>
+			{% else %}
+			
+			
 			
 			
 			
 			{% csrf_token %}
-			<p><strong>{{ f.label }}</strong>:</p>
-				<p>{{ f }}</p>
-			{% endfor %}
-			{% csrf_token %}	
-			{{ pregunta.as_p }}
+			<p><strong></strong></p>
+				<p>{{ pregunta.as_table }}</p>
 				
+			
+			
+			
+			{% endif %}
 
-			<button type="submit">Crear Pregunta</button>
+			<button type="submit" >modificar  Pregunta</button>
 		</form>
 		</div>
 	</div>

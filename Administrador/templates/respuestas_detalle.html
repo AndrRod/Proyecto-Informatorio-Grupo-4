@@ -1,0 +1,62 @@
+{% extends "plantillaBASE.html" %}
+<!-- ahora hay que colocar que herede de plantilla base -->
+<!-- que cargue todo lo que hay en carpeta static -->
+{% load static %}
+{% block title %}LISTA PREGUNTAS{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-5 " style="background-color:#00ad5f">
+
+    <div class="container text-dark">
+        <p class="display-4"><b>Lista Respuestas</b> </p>
+     
+        
+
+    </div>
+</div>
+
+<div class="container py-4">
+ 
+    
+     
+    <div class="row">
+     
+      <div class="col-sm-4">
+        {% object_list %}
+        {% if object_list %}
+		<form action="#" method="POST" class="py-4">
+			{% for respuesta in object_list.respuestas.all %}
+			
+			<ul class="list-group">
+
+                
+                {% csrf_token %}
+                <li class="list-group-item">
+                <div> {{ respuesta.id }}</div>
+                <div> {{ respuesta.texto }}</div>
+                </li>
+            </ul>
+			
+            {% endfor %}
+
+        {% else %}
+
+            <p>No hay Preguntas para Mostrar </p>
+
+        {% endif %}
+		</form>
+
+        <div class="nav-item dropdown active py-4">
+            
+            <a class="btn btn-md btn-outline-secondary" href="{% url 'agregar' %}">Cargar preguntas</a>
+            
+        </div>
+		</div>
+	</div>
+</div>
+
+
+
+
+{% endblock %}
