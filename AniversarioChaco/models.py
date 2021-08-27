@@ -40,8 +40,8 @@ class Pregunta(models.Model):
     class Meta:
         verbose_name ="pregunta"
 
-    def get_absolute_url(self):
-        return reverse('modificar', kwargs={'pk': self.pk})
+    # def get_absolute_url(self):
+    #     return reverse('detalle_pregunta', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.texto
@@ -53,7 +53,7 @@ class Pregunta(models.Model):
 # le damos respuestas a esa pregunta
 class ElegirRespuesta(models.Model):
     #limitar las opciones
-    MAXIMO_RESPUESTAS = 4 
+    MAXIMO_RESPUESTAS = 4
 
     # on_delete es para que desde la base de datos cuando se elimine una respuesta se elimina las dependencias
     pregunta = models.ForeignKey(Pregunta, related_name='opciones', on_delete=models.CASCADE)
@@ -67,8 +67,8 @@ class ElegirRespuesta(models.Model):
         return self.texto
     
 
-    def get_absolute_url(self):
-        return reverse('modificar', kwargs={'pk': self.pk})
+    # def get_absolute_url(self):
+    #     return reverse('detalle_pregunta', kwargs={'pk': self.pk})
 
 
 
@@ -136,7 +136,7 @@ class PreguntasRespondidas(models.Model):
     correcta = models.BooleanField(verbose_name='Es esta la respuesta correcta?', default=False, null=False)
     # puntaje que por defecta será cero
     puntajeObtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, max_digits=6, decimal_places=2)
-    
+
     # intentando incorporar categoria
     # cate = models.ForeignKey(Caract_Categoria, on_delete=models.CASCADE)
 

@@ -50,7 +50,7 @@ from django.forms.models import inlineformset_factory
 
 
 ElegirResFormset = inlineformset_factory(
-    Pregunta, ElegirRespuesta, fields=('pregunta', 'correcta', "texto")
+    Pregunta, ElegirRespuesta, fields=('correcta', "texto")
 )
 
 RespuestasPreguntaFormSet = inlineformset_factory(
@@ -120,10 +120,11 @@ class Modif_pregunta_creada(UpdateView):
 """
 
 
+
 class Modif_pregunta_creada(UpdateView):
     template_name = "modif_pregunta_creada.html"
     model = Pregunta
-    form_class = AdminPreguntaForm
+    form_class = ElegirResFormset
     # o se coloca form_class o fields
     # fields = '__all__'
     
@@ -145,17 +146,17 @@ class Modif_pregunta_creada(UpdateView):
 
     def form_valid(self, form):
         contexto = self.get_context_data()
-        pregunta = contexto["pregunta"]
-        self.object = form.save()
+        pregunta = contexto['pregunta']
+        # self.object = form.save()
         if pregunta.is_valid():
-            pregunta.instance = self.object
+            # pregunta.instance = self.object
             pregunta.save()
 
-        return super().form_valid(form)
+        # return super().form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
 
 
 
-        # return HttpResponseRedirect(self.get_success_url())
     # def get_success_url(self):
     #     return reverse('lista_preguntas')
 
