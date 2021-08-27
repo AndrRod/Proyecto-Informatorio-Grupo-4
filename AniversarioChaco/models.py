@@ -12,11 +12,20 @@ from django.urls.base import reverse
 # Create your models here.
 
 # Create your models here.
+# intentando incorporar categoria primero y despues duración de examen si se puede
 
+# class Caract_Categoria(models.Model):
+#     categoria = models.CharField(max_length=120)
+#     numero_de_preguntas = models.IntegerField()
+    # puede ser tiempo que dure el examen
+    # tiempo = models.IntegerField()
+     
+    # def __str__(self):
+    #     return self.categoria
 # el usuario que va a participar
 # para que nos tome el usuario lo importamos
 # por defecto el puntaje es cero
-# 
+
 
 # Creando el texto de nuestras preguntas
 class Pregunta(models.Model):
@@ -26,6 +35,8 @@ class Pregunta(models.Model):
     # y con verbose_name ponemos como queremos que se vea en el panel de administracion
     
     max_puntaje = models.DecimalField(verbose_name= "Maximo Puntaje", default= 2, decimal_places=2, max_digits=6)
+
+    # cate = models.ForeignKey(Caract_Categoria, on_delete=models.CASCADE)
     class Meta:
         verbose_name ="pregunta"
 
@@ -125,7 +136,8 @@ class PreguntasRespondidas(models.Model):
     correcta = models.BooleanField(verbose_name='Es esta la respuesta correcta?', default=False, null=False)
     # puntaje que por defecta será cero
     puntajeObtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, max_digits=6, decimal_places=2)
-
+    # intentando incorporar categoria
+    # cate = models.ForeignKey(Caract_Categoria, on_delete=models.CASCADE)
 
 # Vamos a crear un formulario con python form.py
 

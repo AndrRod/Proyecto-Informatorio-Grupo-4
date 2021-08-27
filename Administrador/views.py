@@ -220,4 +220,18 @@ def resulPreguntas(request):
 
 def Editado(request):
     return render(request, 'pregunta_cambiada.html')    
+
+
+
+def tablero(request):
     
+    total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+    contador = total_usuarios.count()
+
+
+    context = {
+
+		'usuario': total_usuarios,
+		'contar_user':contador
+	}
+    return render(request, 'resultados_multiplechoice.html', context)

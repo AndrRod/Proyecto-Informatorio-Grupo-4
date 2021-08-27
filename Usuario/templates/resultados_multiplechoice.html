@@ -9,16 +9,19 @@
 
 <div class="container">
 	
+	{% for users in usuario %}
+	{% if users.usuario.username == user.username %}
 	<h1 class="text-center my-4"> 
 		<span class="">
 			
-			<p>Los {{contar_user}} mejores jugadores</p>
+				<!-- <p>Los {{contar_user}} mejores jugadores</p> -->
+			<p>Nombre de usuario: {{ users.usuario.username }} </p>
 			
 		</span>
 	</h1>
 	
 
-	<table class="table">
+	<!-- <table class="table">
 		<thead>
 			<tr>
 				<th>Posicion</th>
@@ -27,16 +30,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for user in usuario %}
 				<tr>
 					<th>{{forloop.counter}}</th>
-					<th>{{user.usuario.username}}</th>
-					<th>{{user.puntajeTotal}}</th>
+					<th>{{users.usuario.username}}</th>
+					<th>{{users.puntajeTotal}}</th>
 				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
+			</tbody>
+		</table> -->
+		
+		
+		{% endif %}
+	{% endfor %}
 </div>
   
   {% endblock %}

@@ -15,6 +15,8 @@ from AniversarioChaco.views import *
 # de esta manera se crea el campo de usuario    
 # va a crear o traer al usuario
 
+
+
 def tablero(request):
     
     total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
@@ -27,6 +29,9 @@ def tablero(request):
 		'contar_user':contador
 	}
     return render(request, 'resultados_multiplechoice.html', context)
+
+
+    
 
 def Juego(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
