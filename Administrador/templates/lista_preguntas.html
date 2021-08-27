@@ -9,7 +9,7 @@
 <div class="container-fluid py-5 " style="background-color:#00ad5f">
 
     <div class="container text-dark">
-        <p class="display-4"><b>Cargar Respuestas:</b> </p>
+        <p class="display-4"><b>Cargar y modificar respuestas:</b> </p>
      
         
 
@@ -22,18 +22,20 @@
      
     <div class="row">
      
-      <div class="col-sm-4">
+      <div class="col-sm-8">
 
         {% if object_list %}
 		<form action="#" method="POST" class="py-4">
 			{% for f in object_list %}
 			
-			<ul class="list-group">
+			<ul class="list-group my-2">
 
                 
                 {% csrf_token %}
+                
                 <li class="list-group-item">
-                    {{ f }} <br><a class="text-reset" href="{% url 'modificar' f.id %}" >Cargar o modificar respuestas</a> <br><a class="text-reset" href="{% url 'detalle_pregunta' f.id %}">ver detalle respuestas </a>
+
+                    <h4> {{ f }} </h4><br><a class="btn btn-md btn-outline-secondary my-2" href="{% url 'modificar' f.id %}" >Cargar o modificar respuestas</a> <br><a class="btn btn-md btn-outline-secondary" href="{% url 'detalle_pregunta' f.id %}">ver detalle respuestas </a>
                 <!-- también se puede colocar pk=f.pk -->
                 
                 </li>

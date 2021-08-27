@@ -19,6 +19,9 @@
 				<tr>
 					<th>Posicion</th>
 					<th>Usuario</th>
+					<th>Nombre y Apellido</th>
+					<th>Correo</th>
+					<th>Admin</th>
 					<th>Puntaje</th>
 				</tr>
 			</thead>
@@ -27,6 +30,10 @@
 					<tr>
 						<th>{{forloop.counter}}</th>
 						<th>{{user.usuario.username}}</th>
+						<th>{{user.usuario.first_name}} {{user.usuario.last_name}}</th>
+						<th>{{user.usuario.email}}</th>
+						<th>{% if user.usuario.is_staff %}SI {% else %} NO {% endif %}</th>
+
 						<th>{{user.puntajeTotal}}</th>
 					</tr>
 					{% endfor %}

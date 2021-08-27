@@ -31,16 +31,17 @@
 			
 			{% csrf_token %}
 			<p><strong>{{ f.label }}</strong>:</p>
-				<p>{{ f }}</p>
+			<input class="form-control form-control-lg" type="text" placeholder="Escribir Pregunta" {{ f }}
+			
 			{% endfor %}
 			{% csrf_token %}	
 			
 			{{ pregunta.as_p }}
 				
+			<button type="submit" class="btn btn-md btn-outline-secondary my-2">Crear Pregunta</button>
+			
 
-			<button type="submit">Crear Pregunta</button>
-
-			<button> <a href="{% url 'listaPreg' %}">Editar Preguntas </a></button>
+			<a class="btn btn-md btn-outline-secondary my-2" href="{% url 'listaPreg' %}">Ir a Editar Respuestas</a>
 		</form>
 		</div>
 	</div>
