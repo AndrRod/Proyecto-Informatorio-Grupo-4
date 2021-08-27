@@ -33,7 +33,9 @@
                 
                 {% csrf_token %}
                 <li class="list-group-item">
-                <a class="text-reset" href="{% url 'modificar' pk=f.pk %}" >{{ f }}</a>
+                    {{ f }} <br><a class="text-reset" href="{% url 'modificar' f.id %}" >Cargar o modificar respuestas</a> <br><a class="text-reset" href="{% url 'detalle_pregunta' f.id %}">ver detalle respuestas </a>
+                <!-- también se puede colocar pk=f.pk -->
+                
                 </li>
             </ul>
 			

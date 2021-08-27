@@ -8,9 +8,10 @@ from Usuario import views
 
 
 urlpatterns = [
-    path('Juego/', views.Juego, name= 'Juego'),
+    path('Juego/', views.JuegoVistaGeneral.as_view(), name= 'Juego'),
+    path('Jugar/', views.Juego, name= 'Jugar'),
     path('resultados_multiplechoice/', views.tablero, name='resultados_multiplechoice'),
-    # quiero que redireccione el resultado de la pregunta respondida a resultado.html
     path('resultados/<int:pregunta_respondida_pk>/', views.resultado_pregunta, name='resultados'),
     
+    # quiero que redireccione el resultado de la pregunta respondida a resultado.html
 ]

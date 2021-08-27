@@ -7,12 +7,14 @@
 {% block content %}
 
 
-<div class="container">
-	
-	<p>
-		<strong>La pregunta:</strong>
-	
-{{respondida.pregunta.texto|safe}}
+<div class="container py-5"> 
+
+	<div class="container">
+		
+		<p>
+			<strong>La pregunta:</strong>
+			{{respondida.pregunta.texto|safe}}
+	</p>
 	</div>
 	<div class="container">
 		<h3 class="text-info"></h3>
@@ -20,37 +22,38 @@
 			<strong>Tu respuesta:</strong>
 			{{respondida.respuesta.texto|safe}}
 		</p>
-
+		
 		
 	{% if respondida.respuesta.correcta %}
 		<h4 class="text-success">Bien hecho!!!! Tu respuesta es correcta</h4>
-	{% else %}
+		{% else %}
 		<h4 class="text-danger">Tu respuesta es incorrecta!!!</h4>
 
 		{% for respuesta in respondida.pregunta.opciones.all %}
-
-			{% if respuesta.correcta %}
-
-				<h4>La respuesta correcta es: <span class="text-success">{{respuesta}}</span></h4>
-				
+		
+		{% if respuesta.correcta %}
+		
+		<h4>La respuesta correcta es: <span class="text-success">{{respuesta}}</span></h4>
+		
 			{% endif %}
 
 		{% endfor %}
 
-	{% endif %}
-
-	<a href="{% url 'Juego' %}">
-		<button class="btn-success">
+		{% endif %}
+		
+	<a href="{% url 'Jugar' %}">
+		<button class="btn-success btn btn-lg btn-block">
 			Continuar con la siguiente pregunta
 		</button>
 	</a>
 
-	</div>
+</div>
 
 
 </div>
 
+</div>
 
-  {% endblock %}
+{% endblock %}
 
 

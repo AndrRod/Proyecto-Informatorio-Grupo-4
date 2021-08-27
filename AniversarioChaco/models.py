@@ -29,8 +29,8 @@ class Pregunta(models.Model):
     class Meta:
         verbose_name ="pregunta"
 
-    # def get_absolute_url(self):
-    #     return reverse('detalle_pregunta', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('modificar', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.texto
@@ -56,6 +56,8 @@ class ElegirRespuesta(models.Model):
         return self.texto
     
 
+    def get_absolute_url(self):
+        return reverse('modificar', kwargs={'pk': self.pk})
 
 
 

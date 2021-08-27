@@ -6,9 +6,42 @@
 
 
 
+
+
 {% block content %}
 
+<div class="container-fluid py-5 " style="background-color:#00ad5f">
 
+    <div class="container text-dark">
+        <p class="display-4"><b>Juego</b> </p>
+        <p class="lead">Para empezar a jugar hace click en el boton de <a class="btn btn-outline-light btn-sm btn-block" href="{% url 'Jugar' %}">Jugar</a><br> Antes de Jugar tene en cuenta lo siguiente:</p>
+        
+        
+        
+     
+        
+
+    </div>
+</div>
+<div class="container py-5">
+    <ol> 
+        <li>Las preguntas solo tienen una respuesta correcta.</li>
+        <li>Reiniciar la pantalla se toma como una respuesta incorrecta. </li>
+        <li>No elegir ningúna pregunta se considera como respuesta incorrecta.</li>
+        <li>Una vez que contestes todas las preguntas se te guardara un solo puntaje.</li>
+        
+      </ol>
+
+                
+    {% csrf_token %}
+    <form class="form-inline my-2 my-lg-0">
+        
+        
+        <a class="btn btn-lg btn-outline-secondary" href="{% url 'Jugar' %}">Jugar</a>
+        
+      </form>
+
+</div>
 
 <!-- aca iria el juego multiple choice -->
 

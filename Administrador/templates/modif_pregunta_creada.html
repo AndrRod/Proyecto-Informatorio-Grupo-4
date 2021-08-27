@@ -9,9 +9,9 @@
 <div class="container-fluid py-5 " style="background-color:#00ad5f">
 
     <div class="container text-dark">
-        <p class="display-4"><b>Modificar Pregunta: </b> </p>
+        <p class="display-4"><b>Modificar la Pregunta: </b> {{ pregunta.instance.texto }} </p>
      
-        
+		
 
     </div>
 </div>
@@ -24,26 +24,36 @@
      
       <div class="col-sm-4">
 
-		<form action="#" method="POST" class="py-4">
-			{% if pregunta|length < 1%}
-				<p>Agrega preguntas no hay ninguna</p>
-			{% else %}
+		  {% if pregunta|length < 1%}
+		  <p>Agrega preguntas no hay ninguna</p>
+		  {% else %}
+		  
+		  <p>Agregar o modificar las respuestas a continuación: </p>
+		  
+		  <div class="container py-2">
+		  <form action="#" method="POST" class="py-4">
 			
-			
-			
-			
-			
-			{% csrf_token %}
-			<p><strong></strong></p>
-				<p>{{ pregunta.as_table }}</p>
-				
-			
-			
-			
-			{% endif %}
+			<!-- {% for p in pregunta %}
 
-			<button type="submit" >modificar  Pregunta</button>
-		</form>
+				{% csrf_token %}
+				
+				
+				<p> {{ p.texto }} </p> 
+				
+				<p> Señalar si es correcta la respuesta es correcta  {{ p.correcta }}</p>
+				
+				{% endfor %} -->
+				{% csrf_token %}
+				{{ pregunta.as_p }}
+				
+				
+				
+				<button class="btn btn-md btn-outline-secondary" type="submit" value="submit">Modificar Pregunta</button>
+				{% endif %}
+				<a class="btn btn-md btn-outline-secondary" href="{% url 'listaPreg' %}">Volver</a>
+				
+			</form>
+		</div>
 		</div>
 	</div>
 </div>

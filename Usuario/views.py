@@ -92,3 +92,7 @@ def resultado_pregunta(request, pregunta_respondida_pk):
         # respondidas = PreguntasRespondidas.objects.filter(usuario= UsuarioJugador).values_list('pregunta__pk', flat=True) 
 # podemos ver todas las preguntas creadas (all() selecciona a todos y exclude() excluye) excluye las que fueron respondidas
         # pregunta = Pregunta.objects.exclude(pk__in=respondidas)
+
+
+class JuegoVistaGeneral(TemplateView):
+     template_name = "Juego.html"

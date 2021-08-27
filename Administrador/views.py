@@ -13,7 +13,7 @@ from Administrador.form import AdminRespuestaForm, AdminPreguntaForm
 # from django.contrib.auth.mixins import LoginRequiredMixin
 
 # heredar la clase ListView y atributos 
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from AniversarioChaco import form
 # probando si puedo usar el modelo de admin de AniversarioChaco
 
@@ -57,6 +57,7 @@ RespuestasPreguntaFormSet = inlineformset_factory(
     Pregunta, ElegirRespuesta, fields=('pregunta', 'correcta', "texto")
 )
 
+
 class CrearPreg(CreateView):
     template_name = "cargar_preguntas.html"
     model = Pregunta
@@ -66,12 +67,13 @@ class CrearPreg(CreateView):
     # inlines = (ElegirRespuestaAdmin,)
     fields = '__all__'
     # # redirecciona
-    success_url = reverse_lazy('pregunta_creada')
-    
+    success_url = reverse_lazy('agregar')
+
 """
+    
 class pregunta_creada(CreateView):
     model = ElegirRespuesta
-    from_class = ElegirRespuestaAdmin
+    from_class = RespuestasPreguntaFormSet
     # context_object_name = 'respuestas'
     template_name = "pregunta_creada.html"
     fields = '__all__'
@@ -103,17 +105,29 @@ class CrearPreg(CreateView):
     
     def get_success_url(self):
         return reverse("agregar")
-
 """
-
+""" 
+class Modif_pregunta_creada(UpdateView):
+    template_name = "modif_pregunta_creada.html"
+    model = Pregunta
+    from_class = ElegirResFormset
+    # en teoria trabaja por defecto con el nombre que esté en el template
+    context_object_name = "pregunta"
+    
+    fields = '__all__'
+    # # redirecciona
+    success_url = reverse_lazy('ListaPreg')
+"""
 
 
 class Modif_pregunta_creada(UpdateView):
     template_name = "modif_pregunta_creada.html"
     model = Pregunta
-    fields = ['texto']
+    form_class = AdminPreguntaForm
+    # o se coloca form_class o fields
+    # fields = '__all__'
     
-
+    # success_url = reverse_lazy ('editado')
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -127,36 +141,44 @@ class Modif_pregunta_creada(UpdateView):
     #     id = self.kwargs.get('id')
     #     return get_object_or_404(Pregunta, id= id)
     
+
+
     def form_valid(self, form):
         contexto = self.get_context_data()
         pregunta = contexto["pregunta"]
-        self.objtect = form.save()
+        self.object = form.save()
         if pregunta.is_valid():
-            pregunta.instance = self.objtect
+            pregunta.instance = self.object
             pregunta.save()
 
         return super().form_valid(form)
+
+
+
         # return HttpResponseRedirect(self.get_success_url())
     # def get_success_url(self):
     #     return reverse('lista_preguntas')
 
 
     def get_success_url(self):
-        return reverse("ListaPreg")
-
+    #    pk = self.kwargs["pk"]
+    #    , kwargs={"pk": pk}
+        return reverse("listaPreg")
 
 
 class ListaPreg(ListView):
     model = Pregunta
     template_name = "lista_preguntas.html"
-    
+
+
 
 
 class respuestasDetailView(DetailView):
     model = Pregunta
     template_name = "respuestas_detalle.html"
-
-
+    form_class = AdminPreguntaForm
+    
+    
 
 """ 
 from django.views.generic.detail import SingleObjectMixin
@@ -194,3 +216,8 @@ class Modif_pregunta_creada(SingleObjectMixin, FormView):
 
 def resulPreguntas(request):
     return render(request, 'resultados_preguntas.html')
+
+
+def Editado(request):
+    return render(request, 'pregunta_cambiada.html')    
+    

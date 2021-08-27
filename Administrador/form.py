@@ -28,6 +28,9 @@ from AniversarioChaco.models import Usuario, Pregunta, PreguntasRespondidas, Ele
 
 # Probando clase formulario para crear
 
+
+
+
 class AdminPreguntaForm(forms.ModelForm):
     class Meta:
     #  model hace referencia al modelo que va a pertenecer
