@@ -7,42 +7,25 @@
 {% block content %}
 
 
-<div class="container">
+{% for users in usuario %}
+{% if users.usuario.username == user.username %}
 	
-	{% for users in usuario %}
-	{% if users.usuario.username == user.username %}
+<div class="container py-5">
 	<h1 class="text-center my-4"> 
 		<span class="">
-			
 				<!-- <p>Los {{contar_user}} mejores jugadores</p> -->
-			<p>Nombre de usuario: {{ users.usuario.username }} </p>
-			
+				Nombre de Usuario: {{users.usuario.username}} <br><br>
+				TU PUNTAJE {{users.puntajeTotal}} <br><br>
+				{% if forloop.counter < 4 %}FELICITACIONES <br><br>{% endif %}
+				Estas en el puesto N° 	{{forloop.counter}}
+
 		</span>
 	</h1>
 	
-
-	<!-- <table class="table">
-		<thead>
-			<tr>
-				<th>Posicion</th>
-				<th>Usuario</th>
-				<th>Puntaje</th>
-			</tr>
-		</thead>
-		<tbody>
-				<tr>
-					<th>{{forloop.counter}}</th>
-					<th>{{users.usuario.username}}</th>
-					<th>{{users.puntajeTotal}}</th>
-				</tr>
-			</tbody>
-		</table> -->
-		
-		
-		{% endif %}
+	{% endif %}
 	{% endfor %}
-</div>
-  
+
   {% endblock %}
 
 
+ 

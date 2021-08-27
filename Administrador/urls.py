@@ -11,6 +11,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 from django.contrib.auth import views as authViews
 
+
 urlpatterns = [
      path('agregar/', staff_member_required(views.CrearPreg.as_view()), name="agregar"),
      path('resultados/', staff_member_required(views.resulPreguntas), name="resultPreg"),
@@ -21,8 +22,8 @@ urlpatterns = [
      path('modificar/<slug:pk>/', staff_member_required(views.Modif_pregunta_creada.as_view()), name="modificar"),
      path('modificar/<slug:pk>/editado', staff_member_required(views.Modif_pregunta_creada.as_view()), name="editado"),
 
-
-     path('resultados_multiplechoice/', views.tablero, name='estadistica')
+     path('resultado_historico/', staff_member_required(views.tablero), name='resultado_historico'),
+     
     
     
 ]

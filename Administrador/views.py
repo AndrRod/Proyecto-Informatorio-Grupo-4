@@ -222,16 +222,13 @@ def Editado(request):
     return render(request, 'pregunta_cambiada.html')    
 
 
+from Usuario.views import tablero
 
-def tablero(request):
-    
+def tablero(request):    
     total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
     contador = total_usuarios.count()
-
-
     context = {
-
 		'usuario': total_usuarios,
 		'contar_user':contador
 	}
-    return render(request, 'resultados_multiplechoice.html', context)
+    return render(request, 'resultados_historico.html', context)
