@@ -1,0 +1,26 @@
+{% extends "plantillaBASE.html" %}
+<!-- ahora hay que colocar que herede de plantilla base -->
+<!-- que cargue todo lo que hay en carpeta static -->
+{% load static %}
+{% block title %}LISTA PREGUNTAS{% endblock %}
+
+{% block content %}
+
+<div class="card text-center my-3 py-3">
+    <div class="card-body">
+        
+        <form action="" method="POST">
+            {% csrf_token %}
+        <h3>Desea Eliminar La pregunta: {{ pregunta.texto }} </h3>
+        <button class="btn btn-outline-danger" type="submit">Si, eliminar</button>
+        <a class="btn btn-outline-success" type="submit" href="{% url 'listaPreg' %}">Cancelar</a>
+        
+        
+        
+    </form>
+</div>
+</div>
+
+
+
+{% endblock %}

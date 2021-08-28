@@ -35,8 +35,14 @@
                 
                 <li class="list-group-item">
 
-                    <h4> {{ f }} </h4><br><a class="btn btn-md btn-outline-secondary my-2" href="{% url 'modificar' f.id %}" >Cargar o modificar respuestas</a> <br><a class="btn btn-md btn-outline-secondary" href="{% url 'detalle_pregunta' f.id %}">ver detalle respuestas </a>
-                <!-- también se puede colocar pk=f.pk -->
+                    <h4> {{ f }} </h4><br>
+                    <form class="form-inline my-2 my-lg-0">
+                        
+                        <a class="btn btn-md btn-outline-secondary my-2" href="{% url 'modificar' f.id %}" >Cargar o modificar respuestas</a>
+                        <a class="btn btn-md btn-outline-secondary" href="{% url 'detalle_pregunta' f.id %}">ver detalle respuestas </a>
+                        <a class="btn btn-md btn-outline-danger" href="{% url 'eliminar' f.id %}">Eliminar </a>
+                        <!-- también se puede colocar pk=f.pk -->
+                    </form>
                 
                 </li>
             </ul>

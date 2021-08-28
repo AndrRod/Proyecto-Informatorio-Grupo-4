@@ -37,15 +37,21 @@
 
 				{% csrf_token %}
 				
+				<div class="container my-2 py-2">
+
+					<input class="form-control form-control-lg" type="text" placeholder="Escribir Respuesta" {{ p.texto }}
+					
+					<p> Señalar si es correcta la respuesta es correcta  {{ p.correcta }}</p>
+				</div>
 				
-				<p> {{ p.texto }} </p> 
 				
-				<p> Señalar si es correcta la respuesta es correcta  {{ p.correcta }}</p>
+				{% endfor %}
+				   -->
 				
-				{% endfor %} -->
+
 				{% csrf_token %}
-				{{ pregunta.as_p }}
-				
+					{{ pregunta.as_p }}
+					
 				
 				
 				<button class="btn btn-md btn-outline-secondary" type="submit" value="submit">Modificar Pregunta</button>

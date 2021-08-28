@@ -13,7 +13,7 @@ from Administrador.form import AdminRespuestaForm, AdminPreguntaForm
 # from django.contrib.auth.mixins import LoginRequiredMixin
 
 # heredar la clase ListView y atributos 
-from django.views.generic import ListView, CreateView, UpdateView, DetailView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 from AniversarioChaco import form
 # probando si puedo usar el modelo de admin de AniversarioChaco
 
@@ -167,6 +167,7 @@ class Modif_pregunta_creada(UpdateView):
         return reverse("listaPreg")
 
 
+
 class ListaPreg(ListView):
     model = Pregunta
     template_name = "lista_preguntas.html"
@@ -179,8 +180,11 @@ class respuestasDetailView(DetailView):
     template_name = "respuestas_detalle.html"
     form_class = AdminPreguntaForm
     
+class borrar_preg(DeleteView):
+    model = Pregunta
+    template_name= 'eliminar_pregunta.html'
+    success_url = '/Adm/lista_preguntas'
     
-
 """ 
 from django.views.generic.detail import SingleObjectMixin
 
