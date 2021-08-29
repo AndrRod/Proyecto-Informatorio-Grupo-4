@@ -14,7 +14,7 @@
 	<h1 class="text-center my-4"> 
 		<span class="">
 				<!-- <p>Los {{contar_user}} mejores jugadores</p> -->
-				Nombre de Usuario: {{users.usuario.username}} <br><br>
+				BIEN HECHO!!! <br><br> TERMINASTE EL CUESTIONARIO {{users.usuario.username}} !!!!<br><br>
 				TU PUNTAJE {{users.puntajeTotal}} <br><br>
 				{% if forloop.counter < 4 %}FELICITACIONES <br><br>{% endif %}
 				Estas en el puesto N° 	{{forloop.counter}}
@@ -24,14 +24,24 @@
 	
 	{% endif %}
 	{% endfor %}
-	<form action="reiniciar_intento" method="POST" class="form">
-        {% csrf_token %}
-        <input type="hidden" name="reinicar_intento" value="reinicar_intento">
+	
 
-		<button type="submit" class="btn btn-md btn-outline-secondary">
-            Reiniciar Intento
-        </button>
+	<form action="" method="POST" class="form">
+        {% csrf_token %}
+		
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+				<input type="hidden" name="reinicar_intento" value="reinicar_intento">
+				<button class="btn btn-lg btn-success">Reiniciar Intento</button>
+			  </div>
+			</div>
+		  </div>
+		
+            
+        
     </form>
+
 
   {% endblock %}
 

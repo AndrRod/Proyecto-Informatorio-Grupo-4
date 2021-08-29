@@ -8,7 +8,7 @@ from Usuario import views
 
 
 urlpatterns = [
-    path('Juego/', views.JuegoVistaGeneral.as_view(), name= 'Juego'),
+    path('Juego/', views.JuegoVistaGeneral, name= 'Juego'),
     path('Jugar/', views.Juego, name= 'Jugar'),
     path('resultados_multiplechoice/', views.tablero, name='resultados_multiplechoice'),
     # path('reiniciar_intento/', views.reinicar_intento, name ='reinicar_intento'),

@@ -28,10 +28,19 @@ def tablero(request):
 		'usuario': total_usuarios,
 		'contar_user':contador
 	}
+
+    if request.method == "POST":
+        
+        PregResp = PreguntasRespondidas.objects.all()
+        PregResp.delete()
+        
+        return redirect('Juego')
     return render(request, 'resultados_multiplechoice.html', context)
-
-
     
+
+
+# 
+  
 
 def Juego(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
@@ -41,6 +50,8 @@ def Juego(request):
     # encontrar el id de esa pregunta
     # y si es correcto que se tome
     if request.method == "POST":
+               
+        
         pregunta_pk = request.POST.get('pregunta_pk')
         # vamos a la clase PreguntasRespondidas para acceder a related_name='intentos'
         # con select_related vamos a tomar de pregunta para obtener el id de la pregunta
@@ -77,19 +88,12 @@ def Juego(request):
             }
                     
         else:
-            # contexo ={ 
-            #     "reiniciar" : reinicar_intento(request, respondidas)
-            # }   
+            
             return redirect('resultados_multiplechoice')
+            
             
     return render(request, "Jugar.html",  context)
 
-
-# def reinicar_intento(request, respondidas):
-#     if request.method == "GET":
-#         PregRespondidas = request.POST.get('pregunta')
-#         respondidas.delete()
-#     return render(request, "juego.html")
 
 
 def resultado_pregunta(request, pregunta_respondida_pk):
@@ -110,7 +114,24 @@ def resultado_pregunta(request, pregunta_respondida_pk):
         # pregunta = Pregunta.objects.exclude(pk__in=respondidas)
 
 
-class JuegoVistaGeneral(TemplateView):
-     template_name = "Juego.html"
+def JuegoVistaGeneral(request):     
+    UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
+    respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
+    pregunta = Pregunta.objects.exclude(pk__in=respondidas)
+
+    pregunta = UsuarioJugador.obtener_Nuev_preguntas()
+        
+    
+    context = {'pregunta': pregunta}
+    
+    if request.method == "POST":
+        PregResp = PreguntasRespondidas.objects.all()
+        PregResp.delete()
+        return redirect('Jugar')
+    return render(request, 'Juego.html', context)
+    
+
+
+
 
 

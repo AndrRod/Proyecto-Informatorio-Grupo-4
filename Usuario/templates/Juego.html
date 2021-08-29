@@ -10,14 +10,29 @@
 
 {% block content %}
 
-<div class="container-fluid py-5 " style="background-color:#00ad5f">
+<div class="container-fluid py-2 " style="background-color:#00ad5f">
 
     <div class="container text-dark">
-        <p class="display-4"><b>Juego</b> </p>
-        <p class="lead">Para empezar a jugar hace click en el boton de <a class="btn btn-outline-light btn-sm btn-block" href="{% url 'Jugar' %}">Jugar</a><br> Antes de Jugar tene en cuenta lo siguiente:</p>
-        
-        
-        
+        <div class="col text-center my-5">
+        <p class="display-4"><b>JUEGO</b> </p>
+        <p class="lead">Para empezar a jugar hace click en el boton de </p>
+                {% if not pregunta is None %}<a class="btn btn-outline-light btn-sm btn-block" href="{% url 'Jugar' %}">Jugar</a>
+            {% else %}
+                <form action="" method="POST" class="form">
+                    {% csrf_token %}
+                    <input type="hidden" name="reinicar_intento" value="reinicar_intento">
+
+                    <button type="submit" class="btn btn-outline-light btn-sm btn-block">
+                        Reiniciar Intento
+                    </button>
+                </form>
+                {% endif %}
+                
+            </div>
+            
+            
+            
+            <h4> Antes de Jugar tene en cuenta lo siguiente:</h4>
      
         
 
@@ -26,20 +41,33 @@
 <div class="container py-5">
     <ol> 
         <li>Las preguntas solo tienen una respuesta correcta.</li>
-        <li>Reiniciar la pantalla se toma como una respuesta incorrecta. </li>
+        <li>Reiniciar o salir de la pantalla del juego se toma como una respuesta incorrecta. <br> y tendras que volver a retomar en el estado que se encontraba el cuestionario </li>
         <li>No elegir ningúna pregunta se considera como respuesta incorrecta.</li>
         <li>Una vez que contestes todas las preguntas se te guardara un solo puntaje.</li>
+        <li>Puedes volver a Jugar una vez que finalice el cuestionario presionando sobre el boton  <a class="btn btn-outline-success btn-sm btn-block" >Reiniciar Intento</a> </li>
         
       </ol>
 
                 
     {% csrf_token %}
+
+    {% if not pregunta is None %}
     <form class="form-inline my-2 my-lg-0">
         
         
         <a class="btn btn-lg btn-outline-secondary" href="{% url 'Jugar' %}">Jugar</a>
         
-      </form>
+    </form>
+    {% else %}
+    <form action="" method="POST" class="form">
+        {% csrf_token %}
+        <input type="hidden" name="reinicar_intento" value="reinicar_intento">
+
+		<button type="submit" class="btn btn-md btn-outline-secondary">
+            Reiniciar Intento
+        </button>
+    </form>
+    {% endif %}
 
 </div>
 
