@@ -15,26 +15,29 @@ from django.urls.base import reverse
 # intentando incorporar categoria primero y despues duración de examen si se puede
 
 # class Caract_Categoria(models.Model):
-#     categoria = models.CharField(max_length=120)
-#     numero_de_preguntas = models.IntegerField()
+#     dificultad o categoria = models.CharField(max_length=120)
     # puede ser tiempo que dure el examen
     # tiempo = models.IntegerField()
      
     # def __str__(self):
     #     return self.categoria
+
 # el usuario que va a participar
 # para que nos tome el usuario lo importamos
 # por defecto el puntaje es cero
 
-
+# DIFICULTAD = (('Facil', 'Facil'), ('Medio', 'Medio'), ('Dificil', 'Dificil'))
 # Creando el texto de nuestras preguntas
 class Pregunta(models.Model):
     RESPUESTAS_PERMITIDAS = 1
     texto = models.TextField(verbose_name= 'Texto de la pregunta')
-    # creamos atributo puntaje maximo que va a estar por defecto en 3
+    # creamos atributo puntaje maximo que va a estar por defecto en 2
     # y con verbose_name ponemos como queremos que se vea en el panel de administracion
     
     max_puntaje = models.DecimalField(verbose_name= "Maximo Puntaje", default= 2, decimal_places=2, max_digits=6)
+
+    # 
+    # Categoria = models.CharField(max_length=90, verbose_name= "dificultad", null= True, choices= DIFICULTAD)
 
     # cate = models.ForeignKey(Caract_Categoria, on_delete=models.CASCADE)
     class Meta:
@@ -76,6 +79,11 @@ class ElegirRespuesta(models.Model):
 class Usuario(models.Model):
     usuario = models.OneToOneField(User, on_delete=CASCADE)
     puntajeTotal = models.DecimalField(verbose_name='Pungaje Total', default=0, max_digits= 10, decimal_places=2, null=True)
+
+
+# intentar despues contador de ingreso y fecha ultimo ingreso
+    # contador_de_ingresos = 
+    # fecha_ultimo_ingreso = 
     
 
     # creamos funcionalidades de la aplicacion:
@@ -136,6 +144,8 @@ class PreguntasRespondidas(models.Model):
     correcta = models.BooleanField(verbose_name='Es esta la respuesta correcta?', default=False, null=False)
     # puntaje que por defecta será cero
     puntajeObtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, max_digits=6, decimal_places=2)
+
+    # Categoria = models.CharField(max_length=90, verbose_name= "dificultad", null= True, choices= DIFICULTAD)
 
     # intentando incorporar categoria
     # cate = models.ForeignKey(Caract_Categoria, on_delete=models.CASCADE)

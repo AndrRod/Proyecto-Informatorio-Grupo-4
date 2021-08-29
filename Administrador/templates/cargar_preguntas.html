@@ -30,14 +30,16 @@
 			
 			
 			{% csrf_token %}
-			<p><strong>{{ f.label }}</strong>:</p>
-			<input class="form-control form-control-lg" type="text" placeholder="Escribir Pregunta" {{ f }}
+			
+				{{ f }}
+				<p><strong>{{ f.label }}</strong>:</p>
 			
 			{% endfor %}
 			{% csrf_token %}	
 			
 			
 				
+			
 			<button type="submit" class="btn btn-md btn-outline-secondary my-2">Crear Pregunta</button>
 			
 

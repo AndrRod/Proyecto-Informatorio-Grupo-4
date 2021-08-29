@@ -24,6 +24,14 @@
 	
 	{% endif %}
 	{% endfor %}
+	<form action="reiniciar_intento" method="POST" class="form">
+        {% csrf_token %}
+        <input type="hidden" name="reinicar_intento" value="reinicar_intento">
+
+		<button type="submit" class="btn btn-md btn-outline-secondary">
+            Reiniciar Intento
+        </button>
+    </form>
 
   {% endblock %}
 

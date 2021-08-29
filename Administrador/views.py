@@ -50,7 +50,7 @@ from django.forms.models import inlineformset_factory
 
 
 ElegirResFormset = inlineformset_factory(
-    Pregunta, ElegirRespuesta, fields=('correcta', "texto")
+    Pregunta, ElegirRespuesta, fields=( 'correcta', "texto")
 )
 
 RespuestasPreguntaFormSet = inlineformset_factory(

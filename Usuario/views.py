@@ -71,14 +71,25 @@ def Juego(request):
             UsuarioJugador.crear_intento(pregunta)
 
 
-        context = {
-            'pregunta': pregunta
+            context = {
+                'pregunta': pregunta
 
-        }
-    return render(request, "Jugar.html", context)
+            }
+                    
+        else:
+            # contexo ={ 
+            #     "reiniciar" : reinicar_intento(request, respondidas)
+            # }   
+            return redirect('resultados_multiplechoice')
+            
+    return render(request, "Jugar.html",  context)
 
 
-
+# def reinicar_intento(request, respondidas):
+#     if request.method == "GET":
+#         PregRespondidas = request.POST.get('pregunta')
+#         respondidas.delete()
+#     return render(request, "juego.html")
 
 
 def resultado_pregunta(request, pregunta_respondida_pk):
@@ -101,3 +112,5 @@ def resultado_pregunta(request, pregunta_respondida_pk):
 
 class JuegoVistaGeneral(TemplateView):
      template_name = "Juego.html"
+
+
