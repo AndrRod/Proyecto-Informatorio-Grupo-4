@@ -1,0 +1,41 @@
+{% extends "plantillaBASE.html" %}
+<!-- ahora hay que colocar que herede de plantilla base -->
+<!-- que cargue todo lo que hay en carpeta static -->
+{% load static %}
+{% block title %}RESULTADOS{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<h1 class="text-center my-4"> 
+		<span class="">
+			{% if contar_user < 1 %} Ningún Jugador hizo el cuestionario {% else %}<p>Los {{contar_user}} mejores jugadores</p>{% endif %}
+		</span>
+	</h1>
+	
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Posicion</th>
+				<th>Usuario</th>
+				<th>Puntaje</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in usuario %}
+				<tr>
+					<th>{{forloop.counter}}</th>
+					<th>{{user.usuario.username}}</th>
+					<th>{% if user.puntajeTotal is None %}0{%else%} {{user.puntajeTotal}}{% endif %}</th>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		
+		
+	</div>
+	
+{% endblock %}
+
+
+ 

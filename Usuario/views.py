@@ -130,8 +130,16 @@ def JuegoVistaGeneral(request):
         return redirect('Jugar')
     return render(request, 'Juego.html', context)
     
+def tabla_posiciones(request):
+    total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+    contador = total_usuarios.count()
+    context = {
 
-
+		'usuario': total_usuarios,
+		'contar_user':contador
+	}
+    return render(request, 'tabla_posiciones.html', context)
+    
 
 
 

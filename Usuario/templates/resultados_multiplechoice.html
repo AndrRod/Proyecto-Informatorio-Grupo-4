@@ -6,41 +6,82 @@
 
 {% block content %}
 
-
+{% if usuario %}
 {% for users in usuario %}
-{% if users.usuario.username == user.username %}
-	
-<div class="container py-5">
+	{% if users.usuario.username == user.username %}
+<div class="container py-2">
+	<div class="row">
+		<div class="text-center my-5">
+			<div class="card">
 	<h1 class="text-center my-4"> 
 		<span class="">
 				<!-- <p>Los {{contar_user}} mejores jugadores</p> -->
-				BIEN HECHO!!! <br><br> TERMINASTE EL CUESTIONARIO {{users.usuario.username}} !!!!<br><br>
-				TU PUNTAJE {{users.puntajeTotal}} <br><br>
+				<strong> BIEN HECHO!!! <br><br> TERMINASTE EL CUESTIONARIO {{users.usuario.username}} !!!!<br><br></strong>
+				Estas en el puesto N° {{forloop.counter}}<br>
+				Tu puntaje {% if users.puntajeTotal is None %}0{%else%} {{users.puntajeTotal}}{% endif %}<br><br>
 				{% if forloop.counter < 4 %}FELICITACIONES <br><br>{% endif %}
-				Estas en el puesto N° 	{{forloop.counter}}
 
 		</span>
 	</h1>
 	
-	{% endif %}
-	{% endfor %}
 	
-
-	<form action="" method="POST" class="form">
-        {% csrf_token %}
-		
-		<div class="container">
+	<div class="col text-center my-3">
+		<form action="" method="POST" class="form">
+			{% csrf_token %}
+			
+			<div class="container">
 			<div class="row">
 				<div class="col text-center">
-				<input type="hidden" name="reinicar_intento" value="reinicar_intento">
-				<button class="btn btn-lg btn-success">Reiniciar Intento</button>
-			  </div>
+					<input type="hidden" name="reinicar_intento" value="reinicar_intento">
+					<button class="btn btn-lg btn-success">Reiniciar Intento</button>
+					<a class="btn btn-lg btn-success" href="/Usuario/tabla_posiciones">Ver tabla de posiciones</a>
+				</div>
+				<div>
+					
+				</div>
 			</div>
-		  </div>
+		</div>
+	</form>
+</div>
+</div>
+</div>
+	
+	{% endif %}
+{% endfor %}
+	
+	
+{% else %}
+<div class="container py-5">
+	<h1 class="text-center my-4"> 
+		<span class="">
+				<!-- <p>Los {{contar_user}} mejores jugadores</p> -->
+				Para ver tu resultado tienes que iniciar una partida {{users.usuario.username}} !!!!
+
+		</span>
+	</h1>
+	
+<div class="col text-center my-5 py-5">
+	<form action="" method="POST" class="form">
+			{% csrf_token %}
+			
+		<div class="container">
+				<div class="row">
+					<div class="col text-center">
+						<input type="hidden" name="reinicar_intento" value="reinicar_intento">
+						<button class="btn btn-lg btn-success">Jugar</button>
+						<a class="btn btn-lg btn-success" href="/Usuario/tabla_posiciones">Ver tabla de posiciones</a>
+					</div>
+				<div>
+			
+		</div>
+	</form>
+</div>
+
+{% endif %}
+
 		
-            
-        
-    </form>
+
+
 
 
   {% endblock %}

@@ -13,6 +13,7 @@ urlpatterns = [
     path('resultados_multiplechoice/', views.tablero, name='resultados_multiplechoice'),
     # path('reiniciar_intento/', views.reinicar_intento, name ='reinicar_intento'),
     path('resultados/<int:pregunta_respondida_pk>/', views.resultado_pregunta, name='resultados'),
+    path('tabla_posiciones', views.tabla_posiciones, name= 'tabla_posiciones'),
     
     # quiero que redireccione el resultado de la pregunta respondida a resultado.html
 ]

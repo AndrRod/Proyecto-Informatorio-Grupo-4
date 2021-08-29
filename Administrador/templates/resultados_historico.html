@@ -10,7 +10,7 @@
 <div class="container">
 		<h1 class="text-center my-4"> 
 			<span class="">
-					<p>Los {{contar_user}} mejores jugadores</p>
+					{% if contar_user < 1 %} Ningún Jugador hizo el cuestionario {% else %}<p>Los {{contar_user}} mejores jugadores</p>{% endif %}
 			</span>
 		</h1>
 		
@@ -34,7 +34,7 @@
 						<th>{{user.usuario.email}}</th>
 						<th>{% if user.usuario.is_staff %}SI {% else %} NO {% endif %}</th>
 
-						<th>{{user.puntajeTotal}}</th>
+						<th>{% if user.puntajeTotal is None %}0{%else%} {{user.puntajeTotal}}{% endif %}</th>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -43,6 +43,7 @@
 	
 </div>
 
-{% endif %}
+
+	{% endif %}
   {% endblock %}
 

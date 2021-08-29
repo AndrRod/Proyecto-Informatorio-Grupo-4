@@ -20,7 +20,7 @@ urlpatterns = [
      path('detalle_pregunta/<slug:pk>/', staff_member_required(views.respuestasDetailView.as_view()), name="detalle_pregunta"),
     
      path('modificar/<slug:pk>/', staff_member_required(views.Modif_pregunta_creada.as_view()), name="modificar"),
-     path('resultado_historico/', staff_member_required(views.tablero), name='resultado_historico'),
+     path('resultado_historico/', views.tablero, name='resultado_historico'),
      
      
      path('eliminar/<slug:pk>/', staff_member_required(views.borrar_preg.as_view()), name="eliminar"),
