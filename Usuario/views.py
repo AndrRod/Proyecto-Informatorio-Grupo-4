@@ -18,16 +18,22 @@ from AniversarioChaco.views import *
 
 
 def tablero(request):
+    context = {}
     
-    total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
-    contador = total_usuarios.count()
+    UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
+    respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
+    pregunta = UsuarioJugador.obtener_Nuev_preguntas()
+    context = {}
+    if pregunta is None:
+        total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+        contador = total_usuarios.count()
 
 
-    context = {
+        context = {
 
-		'usuario': total_usuarios,
-		'contar_user':contador
-	}
+            'usuario': total_usuarios,
+            'contar_user':contador
+        }
 
     if request.method == "POST":
         
@@ -129,15 +135,21 @@ def JuegoVistaGeneral(request):
         PregResp.delete()
         return redirect('Jugar')
     return render(request, 'Juego.html', context)
+
     
 def tabla_posiciones(request):
-    total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
-    contador = total_usuarios.count()
-    context = {
+    UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
+    respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
+    pregunta = UsuarioJugador.obtener_Nuev_preguntas()
+    context = {}
+    if pregunta is None:
+        total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+        contador = total_usuarios.count()
+        context = {
 
-		'usuario': total_usuarios,
-		'contar_user':contador
-	}
+            'usuario': total_usuarios,
+            'contar_user':contador
+        }
     return render(request, 'tabla_posiciones.html', context)
     
 

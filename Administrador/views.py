@@ -230,10 +230,16 @@ def Editado(request):
 from Usuario.views import tablero
 
 def tablero(request):    
-    total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
-    contador = total_usuarios.count()
-    context = {
-		'usuario': total_usuarios,
-		'contar_user':contador
-	}
+    context = {}
+    
+    UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
+    respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
+    pregunta = UsuarioJugador.obtener_Nuev_preguntas()
+    if pregunta is None:
+        total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+        contador = total_usuarios.count()
+        context = {
+            'usuario': total_usuarios,
+            'contar_user':contador
+        }
     return render(request, 'resultados_historico.html', context)
