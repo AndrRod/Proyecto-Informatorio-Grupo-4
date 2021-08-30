@@ -73,7 +73,7 @@ class ElegirRespuesta(models.Model):
     # def get_absolute_url(self):
     #     return reverse('detalle_pregunta', kwargs={'pk': self.pk})
 
-
+import datetime
 from datetime import datetime
 # from django.utils import timezone
 
@@ -86,9 +86,9 @@ class Usuario(models.Model):
     fecha_modificacion = models.DateTimeField(auto_now= True, verbose_name="fecha de ultima partida")
     # fecha_actualizacion = models.DateTimeField(auto_now_add= True)
     CANTIDAD_PARTIDAS_JUGADAS = models.IntegerField(default=0, verbose_name = 'cantidad departidas Jugadas')
+    CANTIDAD_PREGUNTAS_RESPONDIDAS  = models.IntegerField(default=0, verbose_name = 'cantidad de preguntas respondidas')
 
-
-
+    
 
 # intentar despues contador de ingreso y fecha ultimo ingreso
     # contador_de_ingresos = 

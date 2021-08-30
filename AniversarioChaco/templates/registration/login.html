@@ -8,18 +8,37 @@
     </span>
     
 	
-
-
 	 {% if form.errors %}
-	 <p>Tu nombre de usuario y/o contraseña es incorrecto. Por favor intenta de nuevo o Registrate.</p>
- 
-	{% else %}
-	<p>Por favor para ingresar acceda con un usuario valido o registrese.</p>
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Hubo un Error!</strong> <p>Tu nombre de usuario y/o contraseña es incorrecto. Por favor intenta de nuevo o Registrate.</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+	
 	{% endif %}
     
+
+    {% if messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+                <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+            {% endfor %}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        
+	
+    {% endif %}     
     {% csrf_token %}
-	 {{ empty }}
+
+
+
 	{% for formulario in form %}
+	 {{ empty }}
 	
     <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" {{ formulario.label_tag }} 
 		
@@ -31,7 +50,8 @@
 	
 	
              
-             
+
+                 
          
 
     <div class="container-login100-form-btn">
@@ -60,12 +80,5 @@
 </form>
 
 {% endblock %}
-{% block footer %} <div style="background-color: chartreuse; text-align: center; color: black;">{{ mensaje }}</div>{% endblock %}
 
-{% if messages %}
-<ul class="messages">
-    {% for message in mensaje %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+

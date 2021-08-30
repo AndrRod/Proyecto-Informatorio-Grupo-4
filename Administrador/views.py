@@ -69,6 +69,10 @@ class CrearPreg(CreateView):
     # # redirecciona
     success_url = reverse_lazy('agregar')
 
+    def get_success_url(self):
+        mensaje = messages.success(self.request, 'La pregunta fue creada con exito')
+        return reverse("agregar")   
+
 """
     
 class pregunta_creada(CreateView):
@@ -118,15 +122,20 @@ class Modif_pregunta_creada(UpdateView):
     # # redirecciona
     success_url = reverse_lazy('ListaPreg')
 """
+# from django.contrib.messages.views import SuccessMessageMixin
 
+from django.contrib import messages
 
 
 class Modif_pregunta_creada(UpdateView):
     template_name = "modif_pregunta_creada.html"
     model = Pregunta
     form_class = ElegirResFormset
+
     # o se coloca form_class o fields
     # fields = '__all__'
+
+    # success_message = 'La pregunta fue modificada con exito'
     
     # success_url = reverse_lazy ('editado')
 
@@ -150,6 +159,7 @@ class Modif_pregunta_creada(UpdateView):
         # self.object = form.save()
         if pregunta.is_valid():
             # pregunta.instance = self.object
+            mensaje = messages.success(self.request, 'La pregunta fue modificada  con exito')
             pregunta.save()
 
         # return super().form_valid(form)
@@ -180,9 +190,11 @@ class respuestasDetailView(DetailView):
     template_name = "respuestas_detalle.html"
     form_class = AdminPreguntaForm
     
+
+
 class borrar_preg(DeleteView):
     model = Pregunta
-    template_name= 'eliminar_pregunta.html'
+    template_name= 'eliminar_pregunta.html'    
     success_url = '/Adm/lista_preguntas'
     
 """ 

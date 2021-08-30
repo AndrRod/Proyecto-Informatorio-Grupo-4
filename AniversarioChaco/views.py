@@ -52,7 +52,7 @@ def Contacto(request):
 # importamos el formulario de registro que creamos en form.py
 from .form import RegistroFromulario, UsuarioLoginFormulario
 
-
+from django.contrib import messages
 # login basado en funciones
 
 def registro(request):
