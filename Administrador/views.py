@@ -44,6 +44,9 @@ class agregar(ListView):
         usuario = self.request.user
         return usuario
     """
+
+
+from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse_lazy
 # from AniversarioChaco.admin import ElegirRespuesta, ElegirRespuestaAdmin, PreguntaAdmin
 from django.forms.models import inlineformset_factory
@@ -240,6 +243,7 @@ def Editado(request):
 
 
 from Usuario.views import tablero
+
 
 def tablero(request):    
     context = {}

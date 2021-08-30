@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 
 from AniversarioChaco.views import *
 
+
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
@@ -17,6 +20,7 @@ from AniversarioChaco.views import *
 
 
 
+@login_required(login_url= '/')
 def tablero(request):
     context = {}
     
@@ -46,7 +50,7 @@ def tablero(request):
 
 # 
   
-
+@login_required(login_url= '/')
 def Juego(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
     UsuarioJugador.CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE+=1
@@ -102,7 +106,7 @@ def Juego(request):
     return render(request, "Jugar.html",  context)
 
 
-
+@login_required(login_url= '/')
 def resultado_pregunta(request, pregunta_respondida_pk):
     # si no obtiene el objeto nos devuelve error
 	respondida = get_object_or_404(PreguntasRespondidas, pk=pregunta_respondida_pk)
@@ -120,7 +124,7 @@ def resultado_pregunta(request, pregunta_respondida_pk):
 # podemos ver todas las preguntas creadas (all() selecciona a todos y exclude() excluye) excluye las que fueron respondidas
         # pregunta = Pregunta.objects.exclude(pk__in=respondidas)
 
-
+@login_required(login_url= '/')
 def JuegoVistaGeneral(request):     
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
     respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
@@ -141,7 +145,7 @@ def JuegoVistaGeneral(request):
 
 
 
-    
+@login_required(login_url= '/')    
 def tabla_posiciones(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
     respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
