@@ -85,8 +85,8 @@ class Usuario(models.Model):
     # fecha y hora tiene atributos especiales DatetimeField, el auto now (que la primera vez que se cree este registro será la unica vez que se modifique salvo que se coloque auto_now_add)
     fecha_modificacion = models.DateTimeField(auto_now= True, verbose_name="fecha de ultima partida")
     # fecha_actualizacion = models.DateTimeField(auto_now_add= True)
-    CANTIDAD_PARTIDAS_JUGADAS = models.IntegerField(default=0, verbose_name = 'cantidad departidas Jugadas')
-    CANTIDAD_PREGUNTAS_RESPONDIDAS  = models.IntegerField(default=0, verbose_name = 'cantidad de preguntas respondidas')
+    CANTIDAD_PARTIDAS_JUGADAS = models.IntegerField(default=0, verbose_name = 'historial cantidad de partidas Jugadas')
+    CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE  = models.IntegerField(default=0, verbose_name = 'historial cantidad de preguntas respondidas correctamente')
 
     
 

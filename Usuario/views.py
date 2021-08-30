@@ -49,7 +49,7 @@ def tablero(request):
 
 def Juego(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
-    UsuarioJugador.CANTIDAD_PREGUNTAS_RESPONDIDAS+=1
+    UsuarioJugador.CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE+=1
     # vamos a necesitar condicionales dentro de un formulario sino va a entrar en el else
     # si estamos enviando datos
     # hay que encontrar el identificador de la pregunta
@@ -94,7 +94,8 @@ def Juego(request):
             }
                     
         else:
-            
+            UsuarioJugador.CANTIDAD_PARTIDAS_JUGADAS +=1
+            UsuarioJugador.save()
             return redirect('resultados_multiplechoice')
             
             
@@ -124,7 +125,6 @@ def JuegoVistaGeneral(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
     respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
     pregunta = Pregunta.objects.exclude(pk__in=respondidas)
-
     pregunta = UsuarioJugador.obtener_Nuev_preguntas()
         
     
@@ -132,12 +132,14 @@ def JuegoVistaGeneral(request):
     
     if request.method == "POST":
         PregResp = PreguntasRespondidas.objects.all()
-        PregResp.delete()
-        UsuarioJugador.CANTIDAD_PREGUNTAS_RESPONDIDAS = 0
+        PregResp.delete()        
         UsuarioJugador.puntajeTotal = 0
         UsuarioJugador.save()
         return redirect('Jugar')
     return render(request, 'Juego.html', context)
+
+
+
 
     
 def tabla_posiciones(request):

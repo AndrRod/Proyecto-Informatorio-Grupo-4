@@ -4,8 +4,8 @@
 {% load static %}
 {% block title %}RESULTADOS{% endblock %}
 {% block content %}
-	{{ cant }}
-</h1>
+	
+
 {% if usuario %}
 {% for users in usuario %}
 	{% if users.usuario.username == user.username %}
@@ -45,7 +45,7 @@
 </div>
 </div>
 	
-	{% endif %}
+{% endif %}
 {% endfor %}
 	
 	
@@ -66,8 +66,8 @@
 		<div class="container">
 				<div class="row">
 					<div class="col text-center">
-						<input type="hidden" name="reinicar_intento" value="reinicar_intento">
-						<button class="btn btn-lg btn-success">Jugar</button>
+						
+						<a class="btn btn-lg btn-success" href="/Usuario/Jugar">Jugar</a>
 						<a class="btn btn-lg btn-success" href="/Usuario/tabla_posiciones">Ver tabla de posiciones</a>
 					</div>
 				<div>
@@ -83,7 +83,6 @@
 
 
 
-  {% endblock %}
-
+{% endblock %}
 
  

@@ -21,12 +21,12 @@
 					<th>Usuario</th>
 					<th>Nombre y Apellido</th>
 					<th>Correo</th>
-					<th>Fecha de Creación Usuario</th>
-					<th>Fecha Ultimá Partida</th>	
-					{% comment %} <th>Cant. Intentos</th> {% endcomment %}
+					<th>Creación Usuario</th>
+					<th>Ultima Partida</th>	
 					<th>Admin</th>
-					<th>Respuestas correctas</th>
-					<th>Puntaje</th>
+					<th>Historial Juegos</th>
+					<th>Historial Resp. correctas</th>
+					<th>Ultimo Puntaje</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,10 +38,10 @@
 						<th>{{user.usuario.email}}</th>
 						<th>{{user.fecha_creacion}}</th>
 						<th>{{user.fecha_modificacion}}</th>
-						{% comment %} <th>{{user.CANTIDAD_PARTIDAS_JUGADAS}}</th> {% endcomment %}
 
 						<th>{% if user.usuario.is_staff %}SI {% else %} NO {% endif %}</th>
-						<th>{{user.CANTIDAD_PREGUNTAS_RESPONDIDAS}}</th>
+						<th>{{user.CANTIDAD_PARTIDAS_JUGADAS}}</th>
+						<th>{{user.CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE}}</th>
 
 						<th>{% if user.puntajeTotal is None %}0{%else%} {{user.puntajeTotal}}{% endif %}</th>
 					</tr>
