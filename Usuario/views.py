@@ -50,6 +50,8 @@ def tablero(request):
 
 def Juego(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
+    UsuarioJugador.CANTIDAD_PARTIDAS_JUGADAS+=1
+    
     # vamos a necesitar condicionales dentro de un formulario sino va a entrar en el else
     # si estamos enviando datos
     # hay que encontrar el identificador de la pregunta
@@ -84,20 +86,22 @@ def Juego(request):
         pregunta = Pregunta.objects.exclude(pk__in=respondidas)
 
         pregunta = UsuarioJugador.obtener_Nuev_preguntas()
+        
+      
         if pregunta is not None:
             UsuarioJugador.crear_intento(pregunta)
-
-
+            
             context = {
-                'pregunta': pregunta
-
+                'pregunta': pregunta,
+                
             }
                     
         else:
             
+            
             return redirect('resultados_multiplechoice')
             
-            
+        
     return render(request, "Jugar.html",  context)
 
 

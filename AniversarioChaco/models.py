@@ -14,19 +14,19 @@ from django.urls.base import reverse
 # Create your models here.
 # intentando incorporar categoria primero y despues duración de examen si se puede
 
+DIFICULTAD = (('Facil', 'Facil'), ('Medio', 'Medio'), ('Dificil', 'Dificil'))
 # class Caract_Categoria(models.Model):
-#     dificultad o categoria = models.CharField(max_length=120)
-    # puede ser tiempo que dure el examen
-    # tiempo = models.IntegerField()
+#     dificultad_o_categoria = models.CharField(max_length=120, verbose_name= "dificultad", choices= DIFICULTAD)
+#     # puede ser tiempo que dure el examen
+#     # tiempo = models.IntegerField()
      
-    # def __str__(self):
-    #     return self.categoria
+#     def __str__(self):
+#         return self.dificultad_o_categoria
 
 # el usuario que va a participar
 # para que nos tome el usuario lo importamos
 # por defecto el puntaje es cero
 
-# DIFICULTAD = (('Facil', 'Facil'), ('Medio', 'Medio'), ('Dificil', 'Dificil'))
 # Creando el texto de nuestras preguntas
 class Pregunta(models.Model):
     RESPUESTAS_PERMITIDAS = 1
@@ -35,7 +35,7 @@ class Pregunta(models.Model):
     # y con verbose_name ponemos como queremos que se vea en el panel de administracion
     
     max_puntaje = models.DecimalField(verbose_name= "Maximo Puntaje", default= 2, decimal_places=2, max_digits=6)
-
+    dificultad_o_categoria = models.CharField(max_length=90, verbose_name= "dificultad", choices= DIFICULTAD, null= True)
     # 
     # Categoria = models.CharField(max_length=90, verbose_name= "dificultad", null= True, choices= DIFICULTAD)
 
@@ -74,11 +74,20 @@ class ElegirRespuesta(models.Model):
     #     return reverse('detalle_pregunta', kwargs={'pk': self.pk})
 
 
-
+from datetime import datetime
+# from django.utils import timezone
 
 class Usuario(models.Model):
     usuario = models.OneToOneField(User, on_delete=CASCADE)
     puntajeTotal = models.DecimalField(verbose_name='Pungaje Total', default=0, max_digits= 10, decimal_places=2, null=True)
+    # datetime.now fecha y dia de hoy
+    fecha_creacion = models.DateField(default= datetime.now(), verbose_name="fecha de login")
+    # fecha y hora tiene atributos especiales DatetimeField, el auto now (que la primera vez que se cree este registro será la unica vez que se modifique salvo que se coloque auto_now_add)
+    fecha_modificacion = models.DateTimeField(auto_now= True, verbose_name="fecha de ultima partida")
+    # fecha_actualizacion = models.DateTimeField(auto_now_add= True)
+    CANTIDAD_PARTIDAS_JUGADAS = models.IntegerField(default=0, verbose_name = 'cantidad departidas Jugadas')
+
+
 
 
 # intentar despues contador de ingreso y fecha ultimo ingreso

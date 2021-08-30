@@ -21,6 +21,9 @@
 					<th>Usuario</th>
 					<th>Nombre y Apellido</th>
 					<th>Correo</th>
+					<th>Fecha de Creación Usuario</th>
+					<th>Fecha Ultimá Partida</th>	
+					<th>Cant. Intentos</th>
 					<th>Admin</th>
 					<th>Puntaje</th>
 				</tr>
@@ -32,6 +35,10 @@
 						<th>{{user.usuario.username}}</th>
 						<th>{{user.usuario.first_name}} {{user.usuario.last_name}}</th>
 						<th>{{user.usuario.email}}</th>
+						<th>{{user.fecha_creacion}}</th>
+						<th>{{user.fecha_modificacion}}</th>
+						<th>{{user.CANTIDAD_PARTIDAS_JUGADAS}}</th>
+
 						<th>{% if user.usuario.is_staff %}SI {% else %} NO {% endif %}</th>
 
 						<th>{% if user.puntajeTotal is None %}0{%else%} {{user.puntajeTotal}}{% endif %}</th>

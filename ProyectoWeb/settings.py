@@ -114,7 +114,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+# Esto es para que figure una zona horaria cercana a la nuestra
+TIME_ZONE = 'America/Argentina/San_Luis'
 
 USE_I18N = True
 

@@ -3,9 +3,9 @@
 <!-- que cargue todo lo que hay en carpeta static -->
 {% load static %}
 {% block title %}RESULTADOS{% endblock %}
-
 {% block content %}
-
+	{{ cant }}
+</h1>
 {% if usuario %}
 {% for users in usuario %}
 	{% if users.usuario.username == user.username %}
@@ -20,8 +20,9 @@
 				Estas en el puesto N° {{forloop.counter}}<br>
 				Tu puntaje {% if users.puntajeTotal is None %}0{%else%} {{users.puntajeTotal}}{% endif %}<br><br>
 				{% if forloop.counter < 4 %}FELICITACIONES <br><br>{% endif %}
-
+				
 		</span>
+
 	</h1>
 	
 	
@@ -31,10 +32,8 @@
 			
 			<div class="container">
 			<div class="row">
-				<div class="col text-center">
-					<input type="hidden" name="reinicar_intento" value="reinicar_intento">
-					<button class="btn btn-lg btn-success">Reiniciar Intento</button>
-					<a class="btn btn-lg btn-success" href="/Usuario/tabla_posiciones">Ver tabla de posiciones</a>
+				<a class="btn btn-lg btn-outline-success" href="/Usuario/Juego">Reiniciar Intento</a>
+					<a class="btn btn-lg btn-outline-success" href="/Usuario/tabla_posiciones">Ver tabla de posiciones</a>
 				</div>
 				<div>
 					

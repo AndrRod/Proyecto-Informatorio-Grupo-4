@@ -7,7 +7,9 @@ from .form import ElegirInlineFormSet
 from django import forms
 
 
-
+# class CategoriaAdm(admin.ModelAdmin):
+#     list_display = ('id', 'dificultad_o_categoria')
+#     fields = ('dificultad_o_categoria',)
 
 # Register your models here.
 
@@ -27,17 +29,14 @@ class PreguntaAdmin(admin.ModelAdmin):
     model = Pregunta
     inlines = (ElegirRespuestaAdmin,)
     # desde el campo pregunta traer el texto
-    list_display = ['texto',]
+    list_display = ('texto', 'dificultad_o_categoria')
+    fields = ('texto', 'dificultad_o_categoria',)
     # campos de busqueda
     # agregar el related_name de ElegirRespuesta en pregunta
     # preguntas__texto por si alguien quire encontrar una posible respuesta
     search_fields = ['texto', 'pregunta__texto']
     
     
-
-
-
-
 
 # como se vera en panalla las preguntas respondidas
 class PreguntasRespondidasAdmin(admin.ModelAdmin):
@@ -50,3 +49,4 @@ admin.site.register(PreguntasRespondidas, PreguntasRespondidasAdmin)
 admin.site.register(Pregunta, PreguntaAdmin)
 admin.site.register(ElegirRespuesta)
 admin.site.register(Usuario)
+# admin.site.register(Caract_Categoria, CategoriaAdm)
