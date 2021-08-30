@@ -23,7 +23,7 @@ urlpatterns = [
      path('resultado_historico/', staff_member_required(views.tablero), name='resultado_historico'),
      
      
-     path('eliminar/<slug:pk>/', staff_member_required(views.Modif_pregunta_creada.as_view()), name="eliminar"),
+     path('eliminar/<slug:pk>/', staff_member_required(views.borrar_preg.as_view()), name="eliminar"),
      
      
      path('modificar/<slug:pk>/editado', staff_member_required(views.Modif_pregunta_creada.as_view()), name="editado"),
