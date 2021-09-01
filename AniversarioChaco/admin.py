@@ -7,10 +7,6 @@ from .form import ElegirInlineFormSet
 from django import forms
 
 
-# class CategoriaAdm(admin.ModelAdmin):
-#     list_display = ('id', 'dificultad_o_categoria')
-#     fields = ('dificultad_o_categoria',)
-
 # Register your models here.
 
 # para herederar los campos de ElegirRespue esta y observarlo en Pregunta para verlo en administrador
@@ -25,16 +21,31 @@ class ElegirRespuestaAdmin(admin.TabularInline):
     min_num = ElegirRespuesta.MAXIMO_RESPUESTAS
     formset = ElegirInlineFormSet
 
+
+    
+# class CategoriaInlineAdm(admin.TabularInline):
+#     model = Caract_Categoria
+#     #para que no se puedan borrar las respuestas (true o false)
+#     can_delete = False
+
+
+
 class PreguntaAdmin(admin.ModelAdmin):
     model = Pregunta
     inlines = (ElegirRespuestaAdmin,)
     # desde el campo pregunta traer el texto
     list_display = ('texto', 'dificultad_o_categoria')
-    fields = ('texto', 'dificultad_o_categoria',)
+    fields = ('texto', "dificultad_o_categoria")
     # campos de busqueda
     # agregar el related_name de ElegirRespuesta en pregunta
     # preguntas__texto por si alguien quire encontrar una posible respuesta
     search_fields = ['texto', 'pregunta__texto']
+
+# class CategoriaAdm(admin.ModelAdmin):
+#     model = Caract_Categoria
+    
+#     list_display = ('dificultad_o_categoria',)
+#     fields = ('dificultad_o_categoria',)
     
     
 

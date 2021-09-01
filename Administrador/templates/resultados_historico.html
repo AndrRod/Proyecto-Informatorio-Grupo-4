@@ -25,7 +25,7 @@
 					<th>Ultima Partida</th>	
 					<th>Admin</th>
 					<th>Historial Juegos</th>
-					<th>Historial Resp. correctas</th>
+					{% comment %} <th>Historial Resp. correctas</th> {% endcomment %}
 					<th>Ultimo Puntaje</th>
 				</tr>
 			</thead>
@@ -36,12 +36,12 @@
 						<th>{{user.usuario.username}}</th>
 						<th>{{user.usuario.first_name}} {{user.usuario.last_name}}</th>
 						<th>{{user.usuario.email}}</th>
-						<th>{{user.fecha_creacion}}</th>
-						<th>{{user.fecha_modificacion}}</th>
+						<th>{{user.fecha_creacion }}</th>
+						<th>{{user.fecha_modificacion }}</th>
 
 						<th>{% if user.usuario.is_staff %}SI {% else %} NO {% endif %}</th>
 						<th>{{user.CANTIDAD_PARTIDAS_JUGADAS}}</th>
-						<th>{{user.CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE}}</th>
+						{% comment %} <th>{{user.CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE}}</th> {% endcomment %}
 
 						<th>{% if user.puntajeTotal is None %}0{%else%} {{user.puntajeTotal}}{% endif %}</th>
 					</tr>

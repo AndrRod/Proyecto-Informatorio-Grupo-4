@@ -33,34 +33,24 @@
 
 <div class="container py-4">
  
-    
-     
-    <div class="row">
+ <div class="row">
      
       <div class="col-sm-4">
 
 		<form action="#" method="POST" class="py-4">
 			{% for f in form %}
 			
-			
-			
 			{% csrf_token %}
 			
 				{{ f }}
 				<p><strong>{{ f.label }}</strong>:</p>
-			
 			{% endfor %}
-			{% csrf_token %}	
-			
-			
-				
 			
 			<button type="submit" class="btn btn-md btn-outline-secondary my-2">Crear Pregunta</button>
 			
 
 			<a class="btn btn-md btn-outline-secondary my-2" href="{% url 'listaPreg' %}">Ir a Editar Respuestas</a>
 		</form>
-		</div>
 	</div>
 </div>
 

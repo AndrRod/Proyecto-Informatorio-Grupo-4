@@ -12,16 +12,25 @@ from django.urls.base import reverse
 # Create your models here.
 
 # Create your models here.
+
+
 # intentando incorporar categoria primero y despues duración de examen si se puede
 
 DIFICULTAD = (('Facil', 'Facil'), ('Medio', 'Medio'), ('Dificil', 'Dificil'))
+
+
+
 # class Caract_Categoria(models.Model):
-#     dificultad_o_categoria = models.CharField(max_length=120, verbose_name= "dificultad", choices= DIFICULTAD)
-#     # puede ser tiempo que dure el examen
-#     # tiempo = models.IntegerField()
+#     dificultad_o_categoria = models.CharField(max_length=90, verbose_name= "dificultad", choices= DIFICULTAD, null= True)
+# #     # puede ser tiempo que dure el examen
+# #     # tiempo = models.IntegerField()
+#     class Meta:
+#         verbose_name = "dificultad"
      
 #     def __str__(self):
 #         return self.dificultad_o_categoria
+
+
 
 # el usuario que va a participar
 # para que nos tome el usuario lo importamos
@@ -34,12 +43,11 @@ class Pregunta(models.Model):
     # creamos atributo puntaje maximo que va a estar por defecto en 2
     # y con verbose_name ponemos como queremos que se vea en el panel de administracion
     
-    max_puntaje = models.DecimalField(verbose_name= "Maximo Puntaje", default= 2, decimal_places=2, max_digits=6)
-    dificultad_o_categoria = models.CharField(max_length=90, verbose_name= "dificultad", choices= DIFICULTAD, null= True)
-    # 
-    # Categoria = models.CharField(max_length=90, verbose_name= "dificultad", null= True, choices= DIFICULTAD)
+    max_puntaje = models.DecimalField(verbose_name= "Maximo Puntaje", default= 1, decimal_places=2, max_digits=6)
+    dificultad_o_categoria = models.CharField(max_length=90, verbose_name= "dificultad", choices= DIFICULTAD, default = "Facil", null= True)
+       
 
-    # cate = models.ForeignKey(Caract_Categoria, on_delete=models.CASCADE)
+    # categoria = models.ForeignKey(Caract_Categoria, on_delete=models.CASCADE)
     class Meta:
         verbose_name ="pregunta"
 
@@ -47,7 +55,7 @@ class Pregunta(models.Model):
     #     return reverse('detalle_pregunta', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.texto
+        return f'(Dif: {self.dificultad_o_categoria}) {self.texto}'
 
 
 
@@ -61,9 +69,9 @@ class ElegirRespuesta(models.Model):
     # on_delete es para que desde la base de datos cuando se elimine una respuesta se elimina las dependencias
     pregunta = models.ForeignKey(Pregunta, related_name='opciones', on_delete=models.CASCADE)
     # para saber la pregunta verdadera lo hacemos con un booleano
-    correcta = models.BooleanField(verbose_name= 'Es correcta la pregunta?', default=False, null=False)
+    correcta = models.BooleanField(verbose_name= 'correcta', default=False, null=False)
     # texto posible respuestas
-    texto = models.TextField(verbose_name= 'Texto de las respuestas')
+    texto = models.TextField(verbose_name= 'Texto de la respuesta')
 
     # para observar el texto de la respuesta
     def __str__(self):
@@ -75,18 +83,18 @@ class ElegirRespuesta(models.Model):
 
 import datetime
 from datetime import datetime
-# from django.utils import timezone
+from django.utils import timezone
 
 class Usuario(models.Model):
     usuario = models.OneToOneField(User, on_delete=CASCADE)
     puntajeTotal = models.DecimalField(verbose_name='Pungaje Total', default=0, max_digits= 10, decimal_places=2, null=True)
     # datetime.now fecha y dia de hoy
-    fecha_creacion = models.DateField(default= datetime.now(), verbose_name="fecha de login")
+    fecha_creacion = models.DateField(default= timezone.now(), verbose_name="fecha de login")
     # fecha y hora tiene atributos especiales DatetimeField, el auto now (que la primera vez que se cree este registro será la unica vez que se modifique salvo que se coloque auto_now_add)
     fecha_modificacion = models.DateTimeField(auto_now= True, verbose_name="fecha de ultima partida")
     # fecha_actualizacion = models.DateTimeField(auto_now_add= True)
     CANTIDAD_PARTIDAS_JUGADAS = models.IntegerField(default=0, verbose_name = 'historial cantidad de partidas Jugadas')
-    CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE  = models.IntegerField(default=0, verbose_name = 'historial cantidad de preguntas respondidas correctamente')
+    # CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE  = models.IntegerField(default=0, verbose_name = 'historial cantidad de preguntas respondidas correctamente')
 
     
 
@@ -96,7 +104,6 @@ class Usuario(models.Model):
     
 
     # creamos funcionalidades de la aplicacion:
-
     # creamos los intentos y lo guardamos
     def crear_intento(self, pregunta):
         intentos = PreguntasRespondidas(pregunta= pregunta, usuarioPreg= self)
@@ -154,10 +161,13 @@ class PreguntasRespondidas(models.Model):
     # puntaje que por defecta será cero
     puntajeObtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, max_digits=6, decimal_places=2)
 
+
+
+
     # Categoria = models.CharField(max_length=90, verbose_name= "dificultad", null= True, choices= DIFICULTAD)
 
     # intentando incorporar categoria
     # cate = models.ForeignKey(Caract_Categoria, on_delete=models.CASCADE)
 
-# Vamos a crear un formulario con python form.py
+
 

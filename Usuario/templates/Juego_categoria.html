@@ -1,0 +1,131 @@
+{% extends 'plantillaBASE.html'%}
+
+{% load static %}
+
+{% block title %} JUEGO {% endblock %} 
+
+
+
+
+
+{% block content %}
+
+
+
+
+<div class="container-fluid py-2 " style="background-color:#00ad5f">
+
+    <div class="container text-dark">
+        <div class="col text-center my-5">
+        <p class="display-3"><b><strong> JUEGO</strong></b> </p>
+        <p class="lead">Para empezar a jugar y ver la tabla de posiciones hace click en el boton de </p>
+                {% if not pregunta is None %}<a class="btn btn-outline-light btn-sm btn-block" href="{% url 'Jugar' %}">Jugar</a>
+            {% else %}
+                <form action="" method="POST" class="form">
+                    {% csrf_token %}
+                    <input type="hidden" name="reinicar_intento" value="reinicar_intento">
+
+                    <button type="submit" class="btn btn-outline-light btn-sm btn-block">
+                        Reiniciar Intento
+                    </button>
+                </form>
+                {% endif %}
+                
+            </div>
+            
+            
+            
+            <h4> Antes de Jugar tene en cuenta lo siguiente:</h4>
+     
+        
+
+    </div>
+</div>
+<div class="container py-5">
+    <ol> 
+        <li>Las preguntas solo tienen una respuesta correcta.</li>
+        <li>Reiniciar o salir de la pantalla del juego se toma como una respuesta incorrecta. <br> y tendras que volver a retomar en el estado que se encontraba el cuestionario </li>
+        <li>No elegir ningúna pregunta se considera como respuesta incorrecta.</li>
+        <li>Una vez que contestes todas las preguntas se te guardara un solo puntaje.</li>
+        <li>Puedes volver a Jugar una vez que finalice el cuestionario presionando sobre el boton  <a class="btn btn-outline-success btn-sm btn-block" >Reiniciar Intento</a> </li>
+        
+      </ol>
+
+
+{% comment %} 
+<form action="#" method="POST" class="py-4">
+{% csrf_token %} 
+  <div class="form-row align-items-center">
+    <div class="col-auto my-1">
+      <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+        <option selected>Elige una opción</option>
+        <option value="Facil">Facil</option>
+        <option value="Medio">Medio</option>
+        <option value="Dificil">Dificil</option>
+      </select>
+    </div>
+     
+    <div class="col-auto my-1">
+      <button type="submit" class="btn btn-primary">Jugar</button>
+    </div>
+  </div>
+</form>
+
+
+</div> {% endcomment %}
+
+
+
+<div class="container">
+    <div class="counter">
+    <div class="jumbotron my-4">
+        <h3> {{ dificultad }}</h3>
+    </div>
+
+    <form action="" method="POST" class="form" value = '{{ categoria }}'>
+
+
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Example select</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option value='Facil'>Facil</option>
+                <option value='Medio'>Medio</option>
+                <option value='Dificil'>Dificil</option>
+                
+            </select>
+        </div>
+
+
+
+
+
+
+        <input type="hidden" name="categoria_pk" value="{{ categoria.pk }}">
+
+        
+        {% for opciones in pregunta.opciones.all %}
+            <!-- la clase pregunta tiene relacion con elegir respuesta y accedemos related_name="opciones" para pasar todas las opcines de la pregunta -->
+        <p> 
+            <input class="form-check-input" type= "radio" name="categoria" value="{{ categoria.pk }}" id="choice-{{forloop.counter}}">
+
+            <label class="form-check-label" for= "choice-{{forloop.counter}}">
+                {{ dificultad }}
+            </label>
+        </p>
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-md btn-outline-secondary">
+            Enviar
+        </button>
+        
+    </form>
+
+</div>
+</div>
+
+<!-- aca iria el juego multiple choice -->
+
+{% endblock %} 

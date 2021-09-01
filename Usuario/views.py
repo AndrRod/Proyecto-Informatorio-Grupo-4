@@ -2,7 +2,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import Http404
 
-from AniversarioChaco.models import Usuario, Pregunta, PreguntasRespondidas
+from AniversarioChaco.models import Usuario, Pregunta, PreguntasRespondidas, ElegirRespuesta
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import User
 
@@ -29,7 +29,8 @@ def tablero(request):
     pregunta = UsuarioJugador.obtener_Nuev_preguntas()
     context = {}
     if pregunta is None:
-        total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+        # se puede poner 2 parametros de orden y agarra en primer termino uno y despues el otro
+        total_usuarios = Usuario.objects.order_by('-puntajeTotal', '-CANTIDAD_PARTIDAS_JUGADAS')[:10]
         contador = total_usuarios.count()
 
 
@@ -53,7 +54,9 @@ def tablero(request):
 @login_required(login_url= '/')
 def Juego(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
-    UsuarioJugador.CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE+=1
+    
+
+    
     # vamos a necesitar condicionales dentro de un formulario sino va a entrar en el else
     # si estamos enviando datos
     # hay que encontrar el identificador de la pregunta
@@ -86,17 +89,22 @@ def Juego(request):
         respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador).values_list('pregunta__pk', flat=True) 
 # podemos ver todas las preguntas creadas (all() selecciona a todos y exclude() excluye) excluye las que fueron respondidas
         pregunta = Pregunta.objects.exclude(pk__in=respondidas)
+        
+        # contador_preguntas = respondidas.count()
 
         pregunta = UsuarioJugador.obtener_Nuev_preguntas()
+        
+        # if contador_preguntas < 11
         if pregunta is not None:
             UsuarioJugador.crear_intento(pregunta)
 
 
             context = {
-                'pregunta': pregunta
+                'pregunta': pregunta,
+                # 'contador': contador_preguntas
 
             }
-                    
+                        
         else:
             UsuarioJugador.CANTIDAD_PARTIDAS_JUGADAS +=1
             UsuarioJugador.save()
@@ -164,3 +172,44 @@ def tabla_posiciones(request):
 
 
 
+
+
+# intentando juego con categorias parte del juego no se esta ejecutando
+
+@login_required(login_url= '/')
+def Juego_categoria_VistaGeneral(request):     
+    
+    if request.method == "POST":
+               
+        
+        categoria = request.POST.get('categoria')
+        
+        try:
+            
+            Preguntas_categoria_elegida = Pregunta.objects.filter(dificultad_o_categoria= categoria)
+           
+        except ObjectDoesNotExist:
+            return redirect('Juego_categoria')
+        
+        
+        return redirect('Jugar_categoria', {'preguntas_cat' : Preguntas_categoria_elegida})
+    
+        
+
+    dificultad = Pregunta.objects.filter(dificultad_o_categoria= 'Facil')
+    context = {
+
+        "dificultad" : dificultad
+
+    }    
+    return render(request, "Juego_categoria.html",  context)
+
+
+
+@login_required(login_url= '/')
+def Juego_categoria(request):
+    UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
+    
+    
+    if request.method == "POST":
+        pass
