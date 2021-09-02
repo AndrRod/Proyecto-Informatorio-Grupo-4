@@ -9,6 +9,7 @@
 
 {% comment %} {{ CANT_PREG_POR_JUEGO}}
 {{ contador_preg }} {% endcomment %}
+
 {% if contador_preg == CANT_PREG_POR_JUEGO or pregunta is None%}
 	{% for users in usuario %}
 		{% if users.usuario.username == user.username %}
@@ -57,7 +58,7 @@
 	<h1 class="text-center my-4"> 
 		<span class="">
 				<!-- <p>Los {{contar_user}} mejores jugadores</p> -->
-				Para compartir tu Resultado y verlo en la Tabla de posiciones <br> tienes que iniciar una partida y terminarla!!!!
+				Para compartir tu Resultado <br> y ver el resultado definitivo en la Tabla de posiciones <br> tienes que iniciar una partida y terminarla!!!!
 
 				<h4>Sigue tu partida presionado el boton <a class="btn btn-outline-success btn-md btn-block" href="/Usuario/Jugar">jugar</a></h4>
 		</span>

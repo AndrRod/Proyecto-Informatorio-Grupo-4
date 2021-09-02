@@ -22,18 +22,18 @@
      
     <div class="row">
      
-      <div class="col-sm-4">
-        {{ pregunta }}
+      <div class="col-sm-5">
+        <h5>{{ pregunta }}</h5>
         
         {% for opciones in pregunta.opciones.all %}
             
-        <p> 
-            
+        
+        <ul class='py-2'>
             <li> {{ opciones.texto }}
-            {% if opciones.correcta %}  (Esta es la respuesta correcta) {% endif %}
+                {% if opciones.correcta %}  (Esta es la respuesta correcta) {% endif %}
             </li>
             
-        </p>
+        </ul>
         {% endfor %}
 		</form>
 

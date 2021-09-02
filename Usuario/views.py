@@ -68,6 +68,8 @@ def tablero(request):
 def Juego(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
     
+
+    
     
 
     context = {"CANT_PREG_POR_JUEGO": CANT_PREG_POR_JUEGO} 
