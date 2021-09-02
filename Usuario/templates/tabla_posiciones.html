@@ -5,7 +5,7 @@
 {% block title %}RESULTADOS{% endblock %}
 
 {% block content %}
-
+{% if contador_preguntas == CANT_PREG_POR_JUEGO or pregunta is None%}
 <div class="container">
 	<h1 class="text-center my-4"> 
 		<span class="">
@@ -34,6 +34,15 @@
 		
 		
 	</div>
+{% else %}
+<div class="container">
+	<h1 class="text-center my-4"> 
+		<span class="">
+			{% if contar_user < 1 %} Ningún Jugador hizo el cuestionario {% else %}<p>Tienes que terminar la partida para ver la tabla de posiciones</p>{% endif %}
+		</span>
+	</h1>
+	
+{% endif %}
 	
 {% endblock %}
 

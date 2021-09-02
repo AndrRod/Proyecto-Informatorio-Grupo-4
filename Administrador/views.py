@@ -19,7 +19,7 @@ from AniversarioChaco import form
 
 from django.contrib import messages
 
-from Usuario.views import tablero
+from Usuario.views import tablero, CANT_PREG_POR_JUEGO
 
 
 
@@ -137,19 +137,51 @@ def Editado(request):
 
 
 def tablero(request):    
-    context = {}
+    # context = {}
     
+    # UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
+    # respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
+    # pregunta = UsuarioJugador.obtener_Nuev_preguntas()
+
+    
+        # total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+        # contador = total_usuarios.count()
+        
+        # context = {
+        #     'usuario': total_usuarios,
+        #     'contar_user':contador,
+        #     "CANT_PREG_POR_JUEGO": CANT_PREG_POR_JUEGO
+        # }
+
+
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
     respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
     pregunta = UsuarioJugador.obtener_Nuev_preguntas()
-    if pregunta is None:
-        total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
-        contador = total_usuarios.count()
+    #  if pregunta None (significa porque no hay preguntas agregadas)
+    context = {}
+    
+
+    """probando generar 10 preguntas"""
+    respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador).values_list('pregunta__pk', flat=True) 
+    
+    contador_preguntas = respondidas.count()
+
+
+    
+    
+    # if contador_preguntas == (CANT_PREG_POR_JUEGO-1):
+    # if pregunta is None:
+    total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+    contador = total_usuarios.count()
+    
+    context = {
+
+        'usuario': total_usuarios,
+        'contar_user':contador,
+        "contador_preguntas": contador_preguntas,
+        "CANT_PREG_POR_JUEGO": CANT_PREG_POR_JUEGO,
         
-        context = {
-            'usuario': total_usuarios,
-            'contar_user':contador,
-        }
+    }
     return render(request, 'resultados_historico.html', context)
 
 

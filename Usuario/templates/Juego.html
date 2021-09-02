@@ -15,8 +15,8 @@
     <div class="container text-dark">
         <div class="col text-center my-5">
         <p class="display-3"><b><strong> JUEGO</strong></b> </p>
-        <p class="lead">Para empezar a jugar y ver la tabla de posiciones hace click en el boton de </p>
-                {% if not pregunta is None %}<a class="btn btn-outline-light btn-sm btn-block" href="{% url 'Jugar' %}">Jugar</a>
+        <p class="lead">Para empezar a jugar hace click en el boton de </p>
+                {% if contador_preg < CANT_PREG_POR_JUEGO and pregunta is not None %}<a class="btn btn-outline-light btn-sm btn-block" href="{% url 'Jugar' %}">Jugar</a>
             {% else %}
                 <form action="" method="POST" class="form">
                     {% csrf_token %}
@@ -40,18 +40,23 @@
 </div>
 <div class="container py-5">
     <ol> 
+        <li>El sistema te genera 10 preguntas aleatorias de distinta dificultad.</li>
+        <li>Cada pregunta vale 1 punto.</li>
         <li>Las preguntas solo tienen una respuesta correcta.</li>
-        <li>Reiniciar o salir de la pantalla del juego se toma como una respuesta incorrecta. <br> y tendras que volver a retomar en el estado que se encontraba el cuestionario </li>
-        <li>No elegir ningúna pregunta se considera como respuesta incorrecta.</li>
+        <li>Reiniciar o salir de la pantalla del juego se considera como una respuesta incorrecta y <br> y tendras que volver a retomar en el estado que se encontraba el cuestionario </li>
+        <li>No elegir ningúna pregunta se considera como una respuesta incorrecta.</li>
         <li>Una vez que contestes todas las preguntas se te guardara un solo puntaje.</li>
         <li>Puedes volver a Jugar una vez que finalice el cuestionario presionando sobre el boton  <a class="btn btn-outline-success btn-sm btn-block" >Reiniciar Intento</a> </li>
+                
+        <li>!!ADVERTENCIA¡¡ En el caso de que haya menos preguntas que las indicadas (10) por favor contactar con el administrador, el programa seguira funcionando pero el puntaje máximo obtenido no podrá llegar a los 10 puntos <a href="{% url 'contacto' %}"  class="btn btn-outline-danger btn-sm btn-block" target="_blank" >CONTACTO</a> </li>
+        
         
       </ol>
-
-                
+    
     {% csrf_token %}
-
-    {% if not pregunta is None %}
+    {% comment %} {{ CANT_PREG_POR_JUEGO }}
+    {{ contador_preg }} {% endcomment %}
+    {% if contador_preg < CANT_PREG_POR_JUEGO and pregunta is not None %}
     <form class="form-inline my-2 my-lg-0">
         
         

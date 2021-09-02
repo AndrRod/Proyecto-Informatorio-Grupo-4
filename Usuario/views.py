@@ -18,7 +18,7 @@ from django.contrib.auth.decorators import login_required
 # de esta manera se crea el campo de usuario    
 # va a crear o traer al usuario
 
-
+CANT_PREG_POR_JUEGO = 10
 
 @login_required(login_url= '/')
 def tablero(request):
@@ -28,17 +28,30 @@ def tablero(request):
     respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
     pregunta = UsuarioJugador.obtener_Nuev_preguntas()
     context = {}
-    if pregunta is None:
+    
+    
+    """intentando que sean 10 preguntas al azar"""
+    respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
+    
+    contador_preguntas = respondidas.count()    
+    # if contador_preguntas < 3:
+
+    # if pregunta is None:
         # se puede poner 2 parametros de orden y agarra en primer termino uno y despues el otro
-        total_usuarios = Usuario.objects.order_by('-puntajeTotal', '-CANTIDAD_PARTIDAS_JUGADAS')[:10]
-        contador = total_usuarios.count()
+    total_usuarios = Usuario.objects.order_by('-puntajeTotal', '-CANTIDAD_PARTIDAS_JUGADAS')[:10]
+
+    contador = total_usuarios.count()
+    contador +=1
 
 
-        context = {
+    context = {
 
-            'usuario': total_usuarios,
-            'contar_user':contador
-        }
+        'usuario': total_usuarios,
+        'contar_user':contador,
+        'contador_preg' : contador_preguntas,
+        'CANT_PREG_POR_JUEGO' : CANT_PREG_POR_JUEGO,
+        'pregunta' : pregunta
+}
 
     # if request.method == "POST":        
     #     PregResp = PreguntasRespondidas.objects.all()
@@ -55,7 +68,9 @@ def tablero(request):
 def Juego(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
     
+    
 
+    context = {"CANT_PREG_POR_JUEGO": CANT_PREG_POR_JUEGO} 
     
     # vamos a necesitar condicionales dentro de un formulario sino va a entrar en el else
     # si estamos enviando datos
@@ -90,20 +105,27 @@ def Juego(request):
 # podemos ver todas las preguntas creadas (all() selecciona a todos y exclude() excluye) excluye las que fueron respondidas
         pregunta = Pregunta.objects.exclude(pk__in=respondidas)
         
-        # contador_preguntas = respondidas.count()
+        
+        """probando generar 10 preguntas"""
+        contador_preguntas = respondidas.count()
+        contador_preguntas +=1
 
         pregunta = UsuarioJugador.obtener_Nuev_preguntas()
         
-        # if contador_preguntas < 11
-        if pregunta is not None:
-            UsuarioJugador.crear_intento(pregunta)
+        if contador_preguntas < (CANT_PREG_POR_JUEGO+1):
+            if pregunta is not None:
+                # if pregunta is not None:
+                UsuarioJugador.crear_intento(pregunta)
 
 
-            context = {
-                'pregunta': pregunta,
-                # 'contador': contador_preguntas
+                context = {
+                    'pregunta': pregunta,
+                    'contador': contador_preguntas,
+                    'CANT_PREG_POR_JUEGO': CANT_PREG_POR_JUEGO,
+                    
+                    
 
-            }
+                }
                         
         else:
             UsuarioJugador.CANTIDAD_PARTIDAS_JUGADAS +=1
@@ -139,8 +161,16 @@ def JuegoVistaGeneral(request):
     pregunta = Pregunta.objects.exclude(pk__in=respondidas)
     pregunta = UsuarioJugador.obtener_Nuev_preguntas()
         
+    """intentando que sean 10 preguntas al azar"""
+    respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
     
-    context = {'pregunta': pregunta}
+    contador_preguntas = respondidas.count()    
+    
+    context = {
+        'pregunta': pregunta,
+        'contador_preg': contador_preguntas,
+        'CANT_PREG_POR_JUEGO': CANT_PREG_POR_JUEGO
+        }
     
     if request.method == "POST":
         PregResp = PreguntasRespondidas.objects.all()
@@ -158,15 +188,30 @@ def tabla_posiciones(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
     respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
     pregunta = UsuarioJugador.obtener_Nuev_preguntas()
+    #  if pregunta None (significa porque no hay preguntas agregadas)
     context = {}
-    if pregunta is None:
-        total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
-        contador = total_usuarios.count()
-        context = {
+    
 
-            'usuario': total_usuarios,
-            'contar_user':contador
-        }
+    """probando generar 10 preguntas"""
+    respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador).values_list('pregunta__pk', flat=True) 
+    
+    contador_preguntas = respondidas.count()
+
+
+    
+    # if contador_preguntas == (CANT_PREG_POR_JUEGO-1):
+    # if pregunta is None:
+    total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+    contador = total_usuarios.count()
+    
+    context = {
+
+        'usuario': total_usuarios,
+        'contar_user':contador,
+        "contador_preguntas": contador_preguntas,
+        "CANT_PREG_POR_JUEGO": CANT_PREG_POR_JUEGO,
+        
+    }
     return render(request, 'tabla_posiciones.html', context)
     
 
@@ -174,8 +219,11 @@ def tabla_posiciones(request):
 
 
 
-# intentando juego con categorias parte del juego no se esta ejecutando
 
+
+
+# intentando juego con categorias parte del juego no se esta ejecutando, por falta de tiempo me queda como meta mejorar despues del curso
+"""
 @login_required(login_url= '/')
 def Juego_categoria_VistaGeneral(request):     
     
@@ -213,3 +261,5 @@ def Juego_categoria(request):
     
     if request.method == "POST":
         pass
+
+"""
