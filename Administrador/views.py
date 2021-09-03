@@ -8,7 +8,7 @@ from django.urls.base import reverse
 from django.views.generic.base import TemplateView
 from AniversarioChaco.models import Usuario, Pregunta, PreguntasRespondidas, ElegirRespuesta
 # Create your views here.
-from Administrador.form import AdminRespuestaForm, AdminPreguntaForm
+from Administrador.form import AdminPreguntaForm, RespuestasModelForm, RespuestasModelForm
 # heredando de mixins se puede restringir la pagina
 # from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -30,18 +30,28 @@ from django.forms.models import inlineformset_factory
 
 
 ElegirResFormset = inlineformset_factory(
-    Pregunta, ElegirRespuesta, fields=( 'correcta', "texto")
-)
+    Pregunta, ElegirRespuesta, fields=( 'correcta', "texto"))
+
+    # widgets={'correcta': forms.RadioSelect(attrs={'cols': 80, 'rows': 20})})
+
+# AuthorInlineFormSet = inlineformset_factory(Author, Book, fields=['name'], widgets={
+#     'name': Textarea(attrs={'cols': 80, 'rows': 20})
+# })
+# correcta = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'special'}), label='Marcar si es la correcta') 
+# #     texto = forms.CharField(widget=forms.Textarea, label='Respuesta')
+
 
 RespuestasPreguntaFormSet = inlineformset_factory(
     Pregunta, ElegirRespuesta, fields=('pregunta', 'correcta', "texto")
 )
 
+
+
     
 class CrearPreg(CreateView):
     template_name = "cargar_preguntas.html"
     model = Pregunta
-    from_class = RespuestasPreguntaFormSet
+    from_class = ElegirResFormset
     # en teoria trabaja por defecto con el nombre que esté en el template
     # context_object_name = "agregarPreg"
     # inlines = (ElegirRespuesta,)
@@ -171,7 +181,7 @@ def tablero(request):
     
     # if contador_preguntas == (CANT_PREG_POR_JUEGO-1):
     # if pregunta is None:
-    total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+    total_usuarios = Usuario.objects.order_by('-puntajeTotal', '-CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE', '-CANTIDAD_PARTIDAS_JUGADAS')[:10]
     contador = total_usuarios.count()
     
     context = {

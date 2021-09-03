@@ -24,8 +24,8 @@
 					<th>Creación Usuario</th>
 					<th>Ultima Partida</th>	
 					<th>Admin</th>
-					<th>Historial Juegos</th>
-					{% comment %} <th>Historial Resp. correctas</th> {% endcomment %}
+					<th>Hist. Jugadas</th>
+					<th>Hist. Resp. correctas</th>
 					<th>Ultimo Puntaje</th>
 				</tr>
 			</thead>
@@ -41,7 +41,7 @@
 
 						<th>{% if user.usuario.is_staff %}SI {% else %} NO {% endif %}</th>
 						<th>{{user.CANTIDAD_PARTIDAS_JUGADAS}}</th>
-						{% comment %} <th>{{user.CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE}}</th> {% endcomment %}
+						<th>{{user.CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE}}</th>
 
 						<th>{% if user.puntajeTotal is None %}0{%else%} {{user.puntajeTotal}}{% endif %}</th>
 					</tr>

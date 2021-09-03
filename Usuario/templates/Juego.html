@@ -43,12 +43,15 @@
         <li>El sistema te genera 10 preguntas aleatorias de distinta dificultad.</li>
         <li>Cada pregunta vale 1 punto.</li>
         <li>Las preguntas solo tienen una respuesta correcta.</li>
-        <li>Reiniciar o salir de la pantalla del juego se considera como una respuesta incorrecta y <br> y tendras que volver a retomar en el estado que se encontraba el cuestionario </li>
+        <li>Reiniciar o salir de la pantalla del juego se considera como una respuesta incorrecta y tendras que volver a retomar en el estado que se encontraba el cuestionario </li>
         <li>No elegir ningúna pregunta se considera como una respuesta incorrecta.</li>
         <li>Una vez que contestes todas las preguntas se te guardara un solo puntaje.</li>
+        <li>En el caso de que dos o más Jugadores tengan el mismo puntaje final, su posición en la tabla estará dada en primer lugar por su historico de respuestas correctas y en segundo por la cantidad de partidas jugadas</li>
         <li>Puedes volver a Jugar una vez que finalice el cuestionario presionando sobre el boton  <a class="btn btn-outline-success btn-sm btn-block" >Reiniciar Intento</a> </li>
-                
+
+        {% if pregunta_totales < 10%}
         <li>!!ADVERTENCIA¡¡ En el caso de que haya menos preguntas que las indicadas (10) por favor contactar con el administrador, el programa seguira funcionando pero el puntaje máximo obtenido no podrá llegar a los 10 puntos <a href="{% url 'contacto' %}"  class="btn btn-outline-danger btn-sm btn-block" target="_blank" >CONTACTO</a> </li>
+        {% endif %}
         
         
       </ol>

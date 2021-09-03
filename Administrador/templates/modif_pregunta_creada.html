@@ -9,7 +9,7 @@
 <div class="container-fluid py-3 " style="background-color:#00ad5f">
 
     <div class="container text-dark">
-        <p class="display-4"><strong><b>Modificar la Pregunta: </b></strong> {{ pregunta.instance.texto }} </p>
+        <p class="display-4"><strong><b>Modificar la Pregunta: </b></strong> {{ pregunta.instance }} </p>
      
 		
 
@@ -20,41 +20,50 @@
  
     
      
-    <div class="row">
+<div class="row">
+
      
       <div class="col-sm-5">
 
+	
 		  {% if pregunta|length < 1%}
 		  <p>Agrega preguntas no hay ninguna</p>
 		  {% else %}
 		  
 		  <strong><p>Agregar o modificar las respuestas a continuación: </p></strong>
 		  
-		  <div class="container py-2">
-		  <form action="#" method="POST" class="py-4">
-			
-			<!-- {% for p in pregunta %}
+		  
+		  <form method="POST" class="py-4">		
 
+
+			<table>
 				{% csrf_token %}
-				
-				<div class="container my-2 py-2">
+				{{ pregunta }}
+			</table>
 
-					<input class="form-control form-control-lg" type="text" placeholder="Escribir Respuesta" {{ p.texto }}
-					
-					<p> Señalar si es correcta la respuesta es correcta  {{ p.correcta }}</p>
+ 		
+			{% comment %}
+			{% for p in pregunta %}
+				<div class="form-group">
+					<label {{ p.texto.label_tag }} {% csrf_token %}
+					<textarea class="form-control" rows="3" {{ p.texto }} {% csrf_token %}										
 				</div>
-				
-				
-				{% endfor %}
-				   -->
-				
-
-				{% csrf_token %}
-					{{ pregunta.as_p }}
+				<div class="form-group">
+					<input class="form-check-input" type="radio" name="exampleRadios" {{ p.correcta }}{% csrf_token %}
+					<label class="form-check-label" {{ p.correcta.label_tag }}{% csrf_token %}
+						
+					</label>
+				</div>
+				<br><br>
 					
+			{% endfor %} 
+			 {% endcomment %}
+
 				
-				
-				<button class="btn btn-md btn-outline-secondary" type="submit" value="submit">Modificar Pregunta</button>
+				<button class="btn btn-md btn-outline-secondary" type="submit">Modificar Pregunta</button>
+						
+
+			
 				{% endif %}
 				<a class="btn btn-md btn-outline-secondary" href="{% url 'listaPreg' %}">Volver</a>
 				

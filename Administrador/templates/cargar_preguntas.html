@@ -38,19 +38,41 @@
       <div class="col-sm-4">
 
 		<form action="#" method="POST" class="py-4">
-			{% for f in form %}
-			
-			{% csrf_token %}
-			
-				{{ f }}
-				<p><strong>{{ f.label }}</strong>:</p>
-			{% endfor %}
+                {% csrf_token %}
+                
+                
+                
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1"> {{ form.texto.label_tag}}</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" {{ form.texto}}</textarea>
+                </div>
+
+                <label for="exampleInputEmail1">{{ form.max_puntaje.label_tag}}</label>
+                <input class="form-control" type="text" placeholder="Default input"{{ form.max_puntaje }}
+                <small id="emailHelp" class="form-text text-muted">El puntaje de cada pregunta por defecto es 1</small>
+                {% csrf_token %}
+                
+                
+
+
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1"> {{ form.dificultad_o_categoria.label_tag}}</label>
+                                           
+                    
+                    {% csrf_token %}
+                    {{form.dificultad_o_categoria }}                    
+                  
+                  
+                    
+                </div>
+              
 			
 			<button type="submit" class="btn btn-md btn-outline-secondary my-2">Crear Pregunta</button>
 			
 
 			<a class="btn btn-md btn-outline-secondary my-2" href="{% url 'listaPreg' %}">Ir a Editar Respuestas</a>
 		</form>
+        </div>
 	</div>
 </div>
 

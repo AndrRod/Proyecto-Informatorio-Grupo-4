@@ -94,7 +94,7 @@ class Usuario(models.Model):
     fecha_modificacion = models.DateTimeField(auto_now= True, verbose_name="fecha de ultima partida")
     # fecha_actualizacion = models.DateTimeField(auto_now_add= True)
     CANTIDAD_PARTIDAS_JUGADAS = models.IntegerField(default=0, verbose_name = 'historial cantidad de partidas Jugadas')
-    # CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE  = models.IntegerField(default=0, verbose_name = 'historial cantidad de preguntas respondidas correctamente')
+    CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE  = models.IntegerField(default=0, verbose_name = 'historial cantidad de preguntas respondidas correctamente')
 
     
 
@@ -129,6 +129,7 @@ class Usuario(models.Model):
             pregunta_respondida.correcta = True
             pregunta_respondida.puntajeObtenido = respuesta_seleccionada.pregunta.max_puntaje
             pregunta_respondida.respuesta = respuesta_seleccionada
+            self.CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE +=1
         # guardamos nuestra respuesta a la pregunta respondida  
         # si preguntas respondidas que hemos seleccionado coincide con la correcta que creamos, si es la correcta la validamos con un puntaje
          

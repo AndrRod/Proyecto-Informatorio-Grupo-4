@@ -38,7 +38,7 @@ def tablero(request):
 
     # if pregunta is None:
         # se puede poner 2 parametros de orden y agarra en primer termino uno y despues el otro
-    total_usuarios = Usuario.objects.order_by('-puntajeTotal', '-CANTIDAD_PARTIDAS_JUGADAS')[:10]
+    total_usuarios = Usuario.objects.order_by('-puntajeTotal', '-CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE', '-CANTIDAD_PARTIDAS_JUGADAS')[:10]
 
     contador = total_usuarios.count()
     contador +=1
@@ -68,11 +68,11 @@ def tablero(request):
 def Juego(request):
     UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
     
-
     
+    pregunta_totales = Pregunta.objects.all().count()
     
 
-    context = {"CANT_PREG_POR_JUEGO": CANT_PREG_POR_JUEGO} 
+    context = {"CANT_PREG_POR_JUEGO": CANT_PREG_POR_JUEGO, 'pregunta_totales': pregunta_totales} 
     
     # vamos a necesitar condicionales dentro de un formulario sino va a entrar en el else
     # si estamos enviando datos
@@ -113,6 +113,7 @@ def Juego(request):
         contador_preguntas +=1
 
         pregunta = UsuarioJugador.obtener_Nuev_preguntas()
+
         
         if contador_preguntas < (CANT_PREG_POR_JUEGO+1):
             if pregunta is not None:
@@ -130,6 +131,7 @@ def Juego(request):
                 }
                         
         else:
+            UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
             UsuarioJugador.CANTIDAD_PARTIDAS_JUGADAS +=1
             UsuarioJugador.save()
             return redirect('resultados_multiplechoice')
@@ -167,11 +169,15 @@ def JuegoVistaGeneral(request):
     respondidas = PreguntasRespondidas.objects.filter(usuarioPreg= UsuarioJugador)
     
     contador_preguntas = respondidas.count()    
+
+    
+    pregunta_totales = Pregunta.objects.all().count()
     
     context = {
         'pregunta': pregunta,
         'contador_preg': contador_preguntas,
-        'CANT_PREG_POR_JUEGO': CANT_PREG_POR_JUEGO
+        'CANT_PREG_POR_JUEGO': CANT_PREG_POR_JUEGO,
+        'pregunta_totales': pregunta_totales
         }
     
     if request.method == "POST":
@@ -203,7 +209,7 @@ def tabla_posiciones(request):
     
     # if contador_preguntas == (CANT_PREG_POR_JUEGO-1):
     # if pregunta is None:
-    total_usuarios = Usuario.objects.order_by('-puntajeTotal')[:10]
+    total_usuarios = Usuario.objects.order_by('-puntajeTotal', '-CANTIDAD_PREGUNTAS_RESPONDIDAS_CORRECTAMENTE', '-CANTIDAD_PARTIDAS_JUGADAS')[:10]
     contador = total_usuarios.count()
     
     context = {
