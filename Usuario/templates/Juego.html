@@ -50,7 +50,7 @@
         <li>Puedes volver a Jugar una vez que finalice el cuestionario presionando sobre el boton  <a class="btn btn-outline-success btn-sm btn-block" >Reiniciar Intento</a> </li>
 
         {% if pregunta_totales < 10%}
-        <li>!!ADVERTENCIA¡¡ En el caso de que haya menos preguntas que las indicadas (10) por favor contactar con el administrador, el programa seguira funcionando pero el puntaje máximo obtenido no podrá llegar a los 10 puntos <a href="{% url 'contacto' %}"  class="btn btn-outline-danger btn-sm btn-block" target="_blank" >CONTACTO</a> </li>
+        <li>!!ADVERTENCIA¡¡ En el caso de que haya menos preguntas que las indicadas ({{CANT_PREG_POR_JUEGO}}) por favor contactar con el administrador, el programa seguira funcionando pero el puntaje máximo obtenido no podrá llegar a los 10 puntos <a href="{% url 'contacto' %}"  class="btn btn-outline-danger btn-sm btn-block" target="_blank" >CONTACTO</a> </li>
         {% endif %}
         
         
@@ -79,6 +79,5 @@
 
 </div>
 
-<!-- aca iria el juego multiple choice -->
 
 {% endblock %} 

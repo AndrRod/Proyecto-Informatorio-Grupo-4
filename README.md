@@ -36,3 +36,21 @@ DATABASES = {
 *El ADMINISTRADOR, es un SuperUSUARIO, que crea preguntas y respuestas y elige cuales son las correctas. Puede ver las planillas de Posiciones con los datos personales de los participantes (nombre, apellido, correo, puntaje, y si es o no Administrador)
 
 *Para poder acceder a las funciones ambos deben Logearse.
+
+ Especificaciones del Funcionamiento del Proyecto:
+ 
+*El JUEGO se basa en un Multiple Choice, en el cual la pagina Principal nos presenta los datos de Contacto de los integrantes y una intro con datos historicos e imagenes. Para poder acceder al juego en si es necesario que el Usuario se registre. Una vez registrado puede logearse e ingresar a Jugar, y cuando finaliza el mismo puede compartir su resultado y ver una tabla de posiciones básica que consta de posición, nombre de usuario y puntaje.
+
+*El ADMINISTRADOR, es un SuperUSUARIO, que crea y elimina preguntas y respuestas; Y tambien elige cual es la correcta. Puede ver una tabla de Posiciones de los participantes en detalle (fecha de registro, fecha de ultima partida, cantidad de partidas jugadas, historial de respuestas correctas)
+
+*Como particularidad El JUEGO funciona enviando de manera aleatoria 10 preguntas, alcanzando como maximo los 10 Puntos. Solo es guardado y visible el puntaje de la ultima partida. En el caso de que el Administrador haya agregado menos de 10 preguntas, el juego da un aviso al Usuario para que lo tenga en cuenta y se ponga en contacto con el Administrador para informarle del fallo. En el caso de que dos o más Jugadores tengan el mismo puntaje final, su posición en la tabla estará dada en primer lugar por su historico de respuestas correctas y en segundo por la cantidad de partidas jugadas
+
+*Las reglas del juego son: 
+1. El sistema te genera 10 preguntas aleatorias de distinta dificultad.
+2. Cada pregunta vale 1 punto.
+3. Las preguntas solo tienen una respuesta correcta.
+4. Reiniciar o salir de la pantalla del juego se considera como una respuesta incorrecta y tendras que volver a retomar en el estado que se encontraba el cuestionario
+5. No elegir ningúna pregunta se considera como una respuesta incorrecta.
+6. Una vez que contestes todas las preguntas se te guardara un solo puntaje.
+7. En el caso de que dos o más Jugadores tengan el mismo puntaje final, su posición en la tabla estará dada en primer lugar por su historico de respuestas correctas y en segundo por la cantidad de partidas jugadas
+8. Puedes volver a Jugar una vez que finalice el cuestionario presionando sobre el boto Reiniciar

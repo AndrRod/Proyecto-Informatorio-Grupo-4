@@ -81,8 +81,8 @@ class ElegirRespuesta(models.Model):
     # def get_absolute_url(self):
     #     return reverse('detalle_pregunta', kwargs={'pk': self.pk})
 
-import datetime
-from datetime import datetime
+# import datetime
+# from datetime import datetime
 from django.utils import timezone
 
 class Usuario(models.Model):

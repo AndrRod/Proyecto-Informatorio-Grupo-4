@@ -20,7 +20,7 @@
             {% else %}
             <h1> Hiciste todas las preguntas!! Ve tu resultado</h1>
             {% endif %}
-             <p><strong>!!ADVERTENCIA¡¡</strong> En el caso de que haya menos preguntas que las indicadas (10) por favor contactar con el administrador, el programa seguira funcionando pero el puntaje máximo obtenido no podrá llegar a los 10 puntos <a href="{% url 'contacto' %}"  class="btn btn-outline-danger btn-sm btn-block" target="_blank" >CONTACTO</a> </p>
+             <p><strong>!!ADVERTENCIA¡¡</strong> En el caso de que haya menos preguntas que las indicadas ({{CANT_PREG_POR_JUEGO}}) por favor contactar con el administrador, el programa seguira funcionando pero el puntaje máximo obtenido no podrá llegar a los 10 puntos <a href="{% url 'contacto' %}"  class="btn btn-outline-danger btn-sm btn-block" target="_blank" >CONTACTO</a> </p>
             <a class="btn btn-md btn-outline-secondary" href="{% url 'resultados_multiplechoice' %}">Ver resultado cuestionario</a>
         </div>
 
