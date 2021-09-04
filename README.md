@@ -32,7 +32,7 @@ DATABASES = {
 
 - De esta forma ya podemos tener una copia del repositorio que sea funcional en nuestra maquina local.
 
- Especificaciones del Funcionamiento del Proyecto:
+## Especificaciones del Funcionamiento del Proyecto:
  
 *El registro USUARIO solo puede jugar y ver su Resultado, y volver a intentarlo.
 
@@ -40,7 +40,7 @@ DATABASES = {
 
 *Para poder acceder a las funciones ambos deben Logearse.
 
- Especificaciones del Funcionamiento del Proyecto:
+ 
  
 ## El JUEGO:
 Se basa en un Multiple Choice, en el cual la pagina Principal nos presenta los datos de Contacto de los integrantes y una intro con datos historicos e imagenes. Para poder acceder al juego en si es necesario que el Usuario se registre. Una vez registrado puede logearse e ingresar a Jugar, y cuando finaliza el mismo puede compartir su resultado y ver una tabla de posiciones básica que consta de posición, nombre de usuario y puntaje.
@@ -53,6 +53,10 @@ El JUEGO funciona enviando de manera aleatoria 10 preguntas, alcanzando como max
 
 ### Usuario no Logeado o Registrado:
 En el caso de que un usuario quiera ingresar al Sector que corresponde al jugador o administrador, lo redirecciona a la página de inicio o a la página de administrador para que ingrese nombre de usuario y contraseña.
+
+### PENDIENTES:
+
+Nos quedaría como pendiente mejorar en sintaxis y entender mejor la logíca de muchas cosas que intentamos implementar, respecto al juego nos hubiese gustado agregar categorias, dificultades, tiempo de resupesta y que se pueda compartir a una red social.
 
 
 ## 📄 Las reglas del juego son: 
