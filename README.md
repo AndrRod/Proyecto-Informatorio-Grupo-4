@@ -11,7 +11,7 @@ Practicando alternativas para Modelo del Proyecto: Crear una página web que rep
 *instalar en su entorno Virtual las dependencias del proyecto (ir a carpeta requirements para ver el archivo base.txt):
 
 ```sh
-`ip install -r base.txtv`
+ip install -r base.txtv
 ```
 
 En `settings.py` de ProyectoWeb modificar con los datos que corresponden a su maquina local lo que esta en el apartado "DATABASES":
