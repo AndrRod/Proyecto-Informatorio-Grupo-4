@@ -1,13 +1,16 @@
 # Proyecto-Informatorio-Grupo-4
+
+
 Practicando alternativas para Modelo del Proyecto: Crear una página web que representa un juego de multiple choice en conmemoración del Aniversario de la Provincia del Chaco
 
-Las siguientes instrucciones te permiten obtener una copia en tu maquina local para pruebas y desarrollo.
-REQUISITOS:
+## Las siguientes instrucciones te permiten obtener una copia en tu maquina local para pruebas y desarrollo.
+####  🔧 REQUISITOS: 
 
 *instalar en su entorno Virtual las dependencias del proyecto (ir a carpeta requirements para ver el archivo base.txt):
 pip install -r base.txt
 
-En settings.py de ProyectoWeb modificar con los datos que corresponden a su maquina local lo que esta en el apartado "DATABASES":
+En `settings.py` de ProyectoWeb modificar con los datos que corresponden a su maquina local lo que esta en el apartado "DATABASES":
+
 
 DATABASES = {
    
@@ -43,9 +46,10 @@ DATABASES = {
 
 *El ADMINISTRADOR, es un SuperUSUARIO, que crea y elimina preguntas y respuestas; Y tambien elige cual es la correcta. Puede ver una tabla de Posiciones de los participantes en detalle (fecha de registro, fecha de ultima partida, cantidad de partidas jugadas, historial de respuestas correctas)
 
-*Como particularidad El JUEGO funciona enviando de manera aleatoria 10 preguntas, alcanzando como maximo los 10 Puntos. Solo es guardado y visible el puntaje de la ultima partida. En el caso de que el Administrador haya agregado menos de 10 preguntas, el juego da un aviso al Usuario para que lo tenga en cuenta y se ponga en contacto con el Administrador para informarle del fallo. En el caso de que dos o más Jugadores tengan el mismo puntaje final, su posición en la tabla estará dada en primer lugar por su historico de respuestas correctas y en segundo por la cantidad de partidas jugadas
+*Como particularidad El JUEGO funciona enviando de manera aleatoria 10 preguntas, alcanzando como maximo los 10 Puntos. Solo es guardado y visible el puntaje de la ultima partida. En el caso de que el Administrador haya agregado menos de 10 preguntas, el juego da un aviso al Usuario para que lo tenga en cuenta y se ponga en contacto con el Administrador para informarle del fallo. En el caso de que dos o más Jugadores tengan el mismo puntaje final, su posición en la tabla estará dada en primer lugar por su historico de respuestas correctas y en segundo por la cantidad de partidas jugada. La tabla de posiciones es un top 10, es decir solo guarda 10 posiciones.
 
-*Las reglas del juego son: 
+
+## 📄 Las reglas del juego son: 
 1. El sistema te genera 10 preguntas aleatorias de distinta dificultad.
 2. Cada pregunta vale 1 punto.
 3. Las preguntas solo tienen una respuesta correcta.
@@ -53,4 +57,4 @@ DATABASES = {
 5. No elegir ningúna pregunta se considera como una respuesta incorrecta.
 6. Una vez que contestes todas las preguntas se te guardara un solo puntaje.
 7. En el caso de que dos o más Jugadores tengan el mismo puntaje final, su posición en la tabla estará dada en primer lugar por su historico de respuestas correctas y en segundo por la cantidad de partidas jugadas
-8. Puedes volver a Jugar una vez que finalice el cuestionario presionando sobre el boto Reiniciar
+8. Puedes volver a Jugar una vez que finalice el cuestionario presionando sobre el boton
