@@ -45,7 +45,7 @@ DATABASES = {
 ## El JUEGO:
 Se basa en un Multiple Choice, en el cual la pagina Principal nos presenta los datos de Contacto de los integrantes y una intro con datos historicos e imagenes. Para poder acceder al juego en si es necesario que el Usuario se registre. Una vez registrado puede logearse e ingresar a Jugar, y cuando finaliza el mismo puede compartir su resultado y ver una tabla de posiciones básica que consta de posición, nombre de usuario y puntaje.
 
-### El ADMINISTRADOR EN EL JUEGO:
+### El administrador en el Juego:
 Es un SuperUSUARIO, que crea y elimina preguntas y respuestas; Y tambien elige cual es la correcta. Puede ver una tabla de Posiciones de los participantes en detalle (fecha de registro, fecha de ultima partida, cantidad de partidas jugadas, historial de respuestas correctas)
 
 ### Como particularidad:
