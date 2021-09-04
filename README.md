@@ -51,6 +51,9 @@ Es un SuperUSUARIO, que crea y elimina preguntas y respuestas; Y tambien elige c
 ### Como particularidad:
 El JUEGO funciona enviando de manera aleatoria 10 preguntas, alcanzando como maximo los 10 Puntos. Solo es guardado y visible el puntaje de la ultima partida. En el caso de que el Administrador haya agregado menos de 10 preguntas, el juego da un aviso al Usuario para que lo tenga en cuenta y se ponga en contacto con el Administrador para informarle del fallo. En el caso de que dos o más Jugadores tengan el mismo puntaje final, su posición en la tabla estará dada en primer lugar por su historico de respuestas correctas y en segundo por la cantidad de partidas jugada. La tabla de posiciones es un top 10, es decir solo guarda 10 posiciones.
 
+### Usuario no Logeado o Registrado:
+En el caso de que un usuario quiera ingresar al Sector que corresponde al jugador o administrador, lo redirecciona a la página de inicio o a la página de administrador para que ingrese nombre de usuario y contraseña.
+
 
 ## 📄 Las reglas del juego son: 
 1. El sistema te genera 10 preguntas aleatorias de distinta dificultad.
