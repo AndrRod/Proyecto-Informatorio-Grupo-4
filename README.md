@@ -1,17 +1,22 @@
-# Proyecto-Informatorio-Grupo-4
+#  Proyecto-Informatorio-Grupo-4
 
 
 Practicando alternativas para Modelo del Proyecto: Crear una página web que representa un juego de multiple choice en conmemoración del Aniversario de la Provincia del Chaco
 
 ## Las siguientes instrucciones te permiten obtener una copia en tu maquina local para pruebas y desarrollo.
+
+
 ####  🔧 REQUISITOS: 
 
 *instalar en su entorno Virtual las dependencias del proyecto (ir a carpeta requirements para ver el archivo base.txt):
-pip install -r base.txt
+
+```sh
+`ip install -r base.txtv`
+```
 
 En `settings.py` de ProyectoWeb modificar con los datos que corresponden a su maquina local lo que esta en el apartado "DATABASES":
 
-
+```
 DATABASES = {
    
    'default': {
@@ -29,6 +34,7 @@ DATABASES = {
         'DATABASE_PORT': '# Aca agregamos nuestro Puerto de DB',
     }
 }
+```
 
 - De esta forma ya podemos tener una copia del repositorio que sea funcional en nuestra maquina local.
 
