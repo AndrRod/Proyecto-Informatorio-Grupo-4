@@ -5,7 +5,14 @@
 {% block title %}RESULTADOS{% endblock %}
 
 {% block content %}
-{% if contador_preguntas == CANT_PREG_POR_JUEGO or pregunta is None%}
+{% if pregunta_totales < 1 %}
+
+<div class="container">
+	<div class="jumbotron my-4">
+		<h1> Contactar con el administrador para agregar preguntas al cuestionario <a href="{% url 'contacto' %}"  class="btn btn-outline-danger btn-sm btn-block" target="_blank" >CONTACTO</a> </p></h1>
+	</div>
+</div>	
+{% elif contador_preguntas == CANT_PREG_POR_JUEGO or pregunta is None%}
 
 
 <div class="container">

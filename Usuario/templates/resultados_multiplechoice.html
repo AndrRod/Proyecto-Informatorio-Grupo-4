@@ -10,7 +10,14 @@
 {% comment %} {{ CANT_PREG_POR_JUEGO}}
 {{ contador_preg }} {% endcomment %}
 
-{% if contador_preg == CANT_PREG_POR_JUEGO or pregunta is None%}
+{% if pregunta_totales < 1 %}
+
+<div class="container">
+	<div class="jumbotron my-4">
+		<h1> Contactar con el administrador para agregar preguntas al cuestionario <a href="{% url 'contacto' %}"  class="btn btn-outline-danger btn-sm btn-block" target="_blank" >CONTACTO</a> </p></h1>
+	</div>
+</div>	
+{% elif contador_preg == CANT_PREG_POR_JUEGO or pregunta is None%}
 	{% for users in usuario %}
 		{% if users.usuario.username == user.username %}
 	<div class="container py-2">

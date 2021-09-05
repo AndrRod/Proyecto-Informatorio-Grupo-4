@@ -42,6 +42,7 @@ def tablero(request):
 
     contador = total_usuarios.count()
     contador +=1
+    pregunta_totales = Pregunta.objects.all().count()
 
 
     context = {
@@ -50,8 +51,10 @@ def tablero(request):
         'contar_user':contador,
         'contador_preg' : contador_preguntas,
         'CANT_PREG_POR_JUEGO' : CANT_PREG_POR_JUEGO,
-        'pregunta' : pregunta
+        'pregunta' : pregunta,
+        'pregunta_totales': pregunta_totales
 }
+
 
     # if request.method == "POST":        
     #     PregResp = PreguntasRespondidas.objects.all()
@@ -114,7 +117,8 @@ def Juego(request):
 
         pregunta = UsuarioJugador.obtener_Nuev_preguntas()
 
-        
+        pregunta_totales = Pregunta.objects.all().count()
+
         if contador_preguntas < (CANT_PREG_POR_JUEGO+1):
             if pregunta is not None:
                 # if pregunta is not None:
@@ -125,10 +129,15 @@ def Juego(request):
                     'pregunta': pregunta,
                     'contador': contador_preguntas,
                     'CANT_PREG_POR_JUEGO': CANT_PREG_POR_JUEGO,
-                    
+                    'pregunta_totales': pregunta_totales
                     
 
                 }
+            elif pregunta_totales == 0:
+                pass            
+            else:
+                UsuarioJugador.CANTIDAD_PARTIDAS_JUGADAS +=1
+                UsuarioJugador.save()
                         
         else:
             UsuarioJugador, created = Usuario.objects.get_or_create(usuario=request.user)
